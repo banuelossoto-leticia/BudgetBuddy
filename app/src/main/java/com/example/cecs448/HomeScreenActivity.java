@@ -10,7 +10,6 @@ import android.widget.ImageButton;
 
 
 public class HomeScreenActivity extends AppCompatActivity {
-
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
