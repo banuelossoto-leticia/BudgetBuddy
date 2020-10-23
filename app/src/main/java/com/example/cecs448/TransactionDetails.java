@@ -5,20 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
-public class TransactionListActivity extends AppCompatActivity implements View.OnClickListener {
-    ImageView transList;
-    ImageButton homeBtn, pieBtn;
+public class TransactionDetails extends AppCompatActivity implements View.OnClickListener {
+    ImageView homeBtn, pieBtn, transList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_transaction_list);
-        transList = findViewById(R.id.listOfTrans);
-        homeBtn = findViewById(R.id.homeButton3);
-        pieBtn = findViewById(R.id.pieChartButton3);
+        setContentView(R.layout.activity_transaction_details);
+        transList = findViewById(R.id.transListBtn);
+        homeBtn = findViewById(R.id.homeBtn);
+        pieBtn = findViewById(R.id.pieBtn);
 
         transList.setOnClickListener(this);
         homeBtn.setOnClickListener(this);
@@ -29,19 +27,18 @@ public class TransactionListActivity extends AppCompatActivity implements View.O
     @Override
     public void onClick(View v) {
         switch(v.getId()) {
-            case R.id.listOfTrans:
-                startActivity(new Intent(getApplicationContext(), TransactionDetails.class));
+            case R.id.transListBtn:
+                startActivity(new Intent(getApplicationContext(), TransactionListActivity.class));
                 finish();
                 break;
-            case R.id.homeButton3:
+            case R.id.homeBtn:
                 startActivity(new Intent(getApplicationContext(), HomeScreenActivity.class));
                 finish();
                 break;
-            case R.id.pieChartButton3:
+            case R.id.pieBtn:
                 startActivity(new Intent(getApplicationContext(), PieChartActivity.class));
                 finish();
                 break;
         }
     }
-
 }
