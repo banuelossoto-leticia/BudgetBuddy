@@ -1,12 +1,18 @@
 package com.example.cecs448;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class AddTransactionActivity extends AppCompatActivity {
 
@@ -14,6 +20,30 @@ public class AddTransactionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_transaction);
+
+        //dummy data for the categories list
+        ArrayList<String> categories = new ArrayList<String>();
+        categories.add("BILLS");
+        categories.add("CLOTHES");
+        categories.add("FOOD");
+        categories.add("FUN");
+        categories.add("OTHER");
+        categories.add("ADD NEW CATEGORY");
+
+        //creating the drop down menu in order to use it in code.
+        Spinner categoriesDropDownMenu = (Spinner) findViewById(R.id.categoryDropDownMenu);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),  android.R.layout.simple_spinner_dropdown_item, categories);
+        adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
+        categoriesDropDownMenu.setAdapter(adapter);
+
+        //creating the text views and edit texts to show if the user does not input all information needed to submit a transaction
+        final TextView invalidInputAmountText = (TextView) findViewById(R.id.invalidInputAmountText);
+        final TextView oppsText = (TextView) findViewById(R.id.oppsText);
+        final TextView noNoteInputText = (TextView) findViewById(R.id.noNoteInputText);
+
+        final EditText noteTextField = (EditText) findViewById(R.id.noteTextField);
+
+        final EditText amountTextField = (EditText) findViewById(R.id.amountTextField);
 
         //this is the button for the pieChartActivity from AddTransactionActivity
         ImageButton pieChartButton = (ImageButton) findViewById(R.id.pieChartButton4);
@@ -50,8 +80,33 @@ public class AddTransactionActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(AddTransactionActivity.this, TransactionConfirmationActivity.class);
-                startActivity(intent);
+
+                oppsText.setVisibility(View.INVISIBLE);
+                noNoteInputText.setVisibility(View.INVISIBLE);
+                invalidInputAmountText.setVisibility(View.INVISIBLE);
+
+                //checking to see that edit text is filled out.
+                if((TextUtils.isEmpty(noteTextField.getText().toString())) || (TextUtils.isEmpty(amountTextField.getText().toString()))){
+                    //oppsText becomes visible because a user did not meet requirements.
+                    oppsText.setVisibility(View.VISIBLE);
+                    //checks to see which text field was invalid
+                    if(TextUtils.isEmpty(noteTextField.getText().toString())){
+                        noNoteInputText.setVisibility(View.VISIBLE);
+                    }
+                    if((TextUtils.isEmpty(amountTextField.getText().toString()))){
+                        invalidInputAmountText.setVisibility(View.VISIBLE);
+                    }
+
+                }else{
+                    //changes all errors to be invisible again
+                    oppsText.setVisibility(View.INVISIBLE);
+                    noNoteInputText.setVisibility(View.INVISIBLE);
+                    invalidInputAmountText.setVisibility(View.INVISIBLE);
+
+                    //moves onto the next page
+                    Intent intent = new Intent(AddTransactionActivity.this, TransactionConfirmationActivity.class);
+                    startActivity(intent);
+                }
             }
         });
     }
