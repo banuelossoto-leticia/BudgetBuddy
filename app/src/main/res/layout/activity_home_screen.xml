@@ -52,13 +52,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#00000000"
+        android:src="@drawable/add_transaction_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.923"
+        app:layout_constraintHorizontal_bias="0.967"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.844"
-        android:src="@drawable/add_transaction_button" />
+        app:layout_constraintVertical_bias="0.844" />
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/bar_graph"
+        android:layout_height="300dp"
+        android:layout_width="300dp"
+        android:layout_marginStart="137dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="146dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/yearMonthDropDownMenu"
+        />
 
     <Spinner
         android:id="@+id/specificYearMonthDropDownMenu"
@@ -89,15 +101,30 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.259" />
 
-    <ImageView
-        android:id="@+id/bar_graph"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_marginStart="137dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="146dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/yearMonthDropDownMenu"
-        tools:srcCompat="@tools:sample/avatars" />
+    <TextView
+        android:id="@+id/budgetLabel"
+        android:layout_width="79dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginBottom="160dp"
+        android:text="Budget"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/pieChartButton"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/spentLabel"
+        android:layout_width="79dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="270dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="156dp"
+        android:text="Spent"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/addTransactionButton"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

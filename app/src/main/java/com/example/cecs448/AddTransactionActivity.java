@@ -14,11 +14,16 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
 
 public class AddTransactionActivity extends AppCompatActivity
 {
@@ -39,7 +44,6 @@ public class AddTransactionActivity extends AppCompatActivity
             outputWriter.close();
             //successful write toast
             Toast.makeText(getApplicationContext(),"Text file Saved to!"+ getFilesDir(),Toast.LENGTH_LONG).show();
-            System.out.println( "-----------------------------------\n"+getFilesDir());
         }
 
         catch (java.io.IOException e)
@@ -156,4 +160,5 @@ public class AddTransactionActivity extends AppCompatActivity
             }
         });
     }
+
 }
