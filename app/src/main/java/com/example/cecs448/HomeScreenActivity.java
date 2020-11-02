@@ -41,7 +41,6 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
     private String curMonth, curYear; // today month and year
     private BarChart barChart;
     private ArrayList<BarEntry> barEntries; //to store all spending entries for bar graph
-    private List<String> xAxis; //x axis of bar graph
     private float budget, spending;  //for bar graph
     private TextView budgetLabel, spentLabel;
 
@@ -135,7 +134,6 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
     private void displayBarGraph(){
         calculateSpending();
         barEntries = new ArrayList<>();
-        xAxis = new ArrayList<>();
 
         //bar graph entries
         barEntries.add(new BarEntry(0,budget));
