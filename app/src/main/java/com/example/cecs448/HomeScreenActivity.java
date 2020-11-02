@@ -28,10 +28,15 @@ public class HomeScreenActivity extends AppCompatActivity
         //binding xml elements
         monthDropDown=findViewById(R.id.yearMonthDropDownMenu);
         barGraph=findViewById(R.id.bar_graph);
+        yearDropDown=findViewById(R.id.specificYearMonthDropDownMenu);
 
         //initial image for bar graph
         barGraph.setImageDrawable(getResources().getDrawable(R.drawable.bar_graph_jan));
 
+        //array holding all the options for the year spinner
+        String[] years=new String[]{"2020"};
+        //creates an adapter with the years
+        ArrayAdapter<String> adapterYears = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, years);
         //array holding all the options for the spinner
         String[] months = new String[]{"January", "February","March","April","May","June","July","August","September","October","November","December"};
         //creates an adapter with the months
@@ -102,6 +107,7 @@ public class HomeScreenActivity extends AppCompatActivity
 
         //provides the adapter for the spinner
         monthDropDown.setAdapter(adapter);
+        yearDropDown.setAdapter(adapterYears);
 
         //this is the button for the pieChartActivity from HomeScreenActivity
         ImageButton pieChartButton = (ImageButton) findViewById(R.id.pieChartButton);
