@@ -39,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#00000000"
-        android:src="@drawable/home_button_highlighted"
+        android:src="@drawable/home_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.25"
@@ -151,8 +151,8 @@
 
     <EditText
         android:id="@+id/noteTextField"
-        android:layout_width="330dp"
-        android:layout_height="152dp"
+        android:layout_width="332dp"
+        android:layout_height="118dp"
         android:background="@drawable/note_text_field_background"
         android:ems="10"
         android:gravity="top"

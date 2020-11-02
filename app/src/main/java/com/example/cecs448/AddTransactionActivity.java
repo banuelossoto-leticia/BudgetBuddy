@@ -22,7 +22,7 @@ import java.util.Date;
 
 public class AddTransactionActivity extends AppCompatActivity
 {
-    //save to .txt file on device. To see it, go to "Device file explorer" on the bottom right corner of the IDE, then data/data/com.example.cecs448/files
+    //save to .txt file on device. To see it, go to "Device file explorer" on the bottom right corner of the IDE, then data/user/0/com.example.cecs448/files
     private void saveExpense(String amount, String note, String category)
     {
         try
@@ -39,6 +39,7 @@ public class AddTransactionActivity extends AppCompatActivity
             outputWriter.close();
             //successful write toast
             Toast.makeText(getApplicationContext(),"Text file Saved to!"+ getFilesDir(),Toast.LENGTH_LONG).show();
+            System.out.println( "-----------------------------------\n"+getFilesDir());
         }
 
         catch (java.io.IOException e)
