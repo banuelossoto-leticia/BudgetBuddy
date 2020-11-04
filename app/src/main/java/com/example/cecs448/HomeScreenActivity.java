@@ -20,10 +20,16 @@ public class HomeScreenActivity extends AppCompatActivity
     private Spinner monthDropDown,yearDropDown;
     private ImageView barGraph;
 
+    //dummy is added to transactions
     //this is for that transaction list is available throughout app
     static ArrayList<Transaction> transactions = new ArrayList<Transaction>();
     //this is for categories to be available throughout app
     static ArrayList<String> categories = new ArrayList<String>();
+
+    /**method will update transactions*/
+    public void updateTransactions(ArrayList<Transaction> updatedTransactions){
+        this.transactions = updatedTransactions;
+    }
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -34,18 +40,36 @@ public class HomeScreenActivity extends AppCompatActivity
 
         //LETY: this is dummy value for transactions
         //creating dummy transactions
-        transactions.add(new Transaction("BILLS",45.34, "This is electricity bill"));
-        transactions.add(new Transaction("BILLS",400.00, "this is rent"));
-        transactions.add(new Transaction("FUN",23.23,"go-kart"));
+        //checks to see if arrayList transaction is empty, if it is initialized for rn with this data
+        if(transactions.isEmpty()){
+            transactions.add(new Transaction ("BILLS",45.34, "This is electricity bill"));
+            transactions.add(new Transaction("BILLS",400.00, "this is rent"));
+            transactions.add(new Transaction("FUN",23.23,"go-kart"));
+        }
+
 
         //LETY: this is dummy values for categories
         //dummy data for the categories list
-        categories.add("BILLS");
-        categories.add("CLOTHES");
-        categories.add("FOOD");
-        categories.add("FUN");
-        categories.add("OTHER");
-        categories.add("ADD NEW CATEGORY");
+        /**since this is dummy every time homeScreen is seen it doubles categories, so for now it will
+        check to see if a category already exists with that name.*/
+        if(!categories.contains("BILLS")){
+            categories.add("BILLS");
+        }
+        if(!categories.contains("CLOTHES")){
+            categories.add("CLOTHES");
+        }
+        if(!categories.contains("FOOD")){
+            categories.add("FOOD");
+        }
+        if(!categories.contains("FUN")){
+            categories.add("FUN");
+        }
+        if(!categories.contains("OTHER")){
+            categories.add("OTHER");
+        }
+        if(!categories.contains("ADD NEW CATEGORY")){
+            categories.add("ADD NEW CATEGORY");
+        }
 
         //binding xml elements
         monthDropDown=findViewById(R.id.yearMonthDropDownMenu);
