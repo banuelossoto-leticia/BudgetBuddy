@@ -4,10 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,26 +15,24 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
-public class AddTransactionActivity extends AppCompatActivity
+public class AddBudgetActivity extends AppCompatActivity
 {
-    //save to .txt file on device. To see it, go to "Device file explorer" on the bottom right corner of the IDE, then data/user/0/com.example.cecs448/files
-    private void saveExpense(String amount, String note, String category)
+    private void saveBudget(String amount, String note)
     {
         try
         {
             //create a timestamp for the entry
             String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH").format(new Date());
             //define the file to save
-            File file=new File(getFilesDir()+"expenses.txt");
+            File file=new File(getFilesDir()+"budget.txt");
             //true indicates to append instead of overwrite
             FileOutputStream fileout=new FileOutputStream(file, true);
             OutputStreamWriter outputWriter=new OutputStreamWriter(fileout);
             //write expense info. Placing category and note inside quotes because we are using a comma as delimiter (a note or category might contain a comma?)
-            outputWriter.write(amount+","+"\""+category+"\""+","+timeStamp+","+"\""+note+"\""+"\n");
+            outputWriter.write(amount+","+timeStamp+","+"\""+note+"\""+"\n");
             outputWriter.close();
             //successful write toast
             Toast.makeText(getApplicationContext(),"Text file Saved to!"+ getFilesDir(),Toast.LENGTH_LONG).show();
@@ -49,10 +45,9 @@ public class AddTransactionActivity extends AppCompatActivity
         }
     }
 
-    //fills the file with dummy data
-    public void generateRandomData()
+    //fills the file with dummy data (to test it out)
+    private void generateRandomData()
     {
-
         for (int i=0;i<100;i++)
         {
             try
@@ -72,7 +67,7 @@ public class AddTransactionActivity extends AppCompatActivity
                 FileOutputStream fileout = new FileOutputStream(file, true);
                 OutputStreamWriter outputWriter = new OutputStreamWriter(fileout);
                 //write expense info. Placing category and note inside quotes because we are using a comma as delimiter (a note or category might contain a comma?)
-                outputWriter.write(randomAmount+","+"\""+"FOOD"+"\""+","+timeStamp+","+"\""+"TEST"+"\""+"\n");
+                outputWriter.write(randomAmount + "," + timeStamp + "," + "\"" + "TESTING" + "\"" + "\n");
                 outputWriter.close();
             } catch (java.io.IOException e) {
                 //do something if an IOException occurs.
@@ -85,24 +80,9 @@ public class AddTransactionActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_transaction);
+        setContentView(R.layout.activity_add_budget);
 
         generateRandomData();
-
-        //dummy data for the categories list
-        ArrayList<String> categories = new ArrayList<String>();
-        categories.add("BILLS");
-        categories.add("CLOTHES");
-        categories.add("FOOD");
-        categories.add("FUN");
-        categories.add("OTHER");
-        categories.add("ADD NEW CATEGORY");
-
-        //creating the drop down menu in order to use it in code.
-        final Spinner categoriesDropDownMenu = (Spinner) findViewById(R.id.categoryDropDownMenu);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),  android.R.layout.simple_spinner_dropdown_item, categories);
-        adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
-        categoriesDropDownMenu.setAdapter(adapter);
 
         //creating the text views and edit texts to show if the user does not input all information needed to submit a transaction
         final TextView invalidInputAmountText = (TextView) findViewById(R.id.invalidInputAmountText);
@@ -118,7 +98,7 @@ public class AddTransactionActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(AddTransactionActivity.this, PieChartActivity.class);
+                Intent intent = new Intent(AddBudgetActivity.this, PieChartActivity.class);
                 startActivity(intent);
             }
         });
@@ -130,7 +110,7 @@ public class AddTransactionActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(AddTransactionActivity.this, TransactionListActivity.class);
+                Intent intent = new Intent(AddBudgetActivity.this, TransactionListActivity.class);
                 startActivity(intent);
             }
         });
@@ -142,11 +122,10 @@ public class AddTransactionActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(AddTransactionActivity.this, HomeScreenActivity.class);
+                Intent intent = new Intent(AddBudgetActivity.this, HomeScreenActivity.class);
                 startActivity(intent);
             }
         });
-
 
         //this is the button for the back_Button
         ImageButton backButton = (ImageButton) findViewById(R.id.back_button);
@@ -155,7 +134,7 @@ public class AddTransactionActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(AddTransactionActivity.this, HomeScreenActivity.class);
+                Intent intent = new Intent(AddBudgetActivity.this, HomeScreenActivity.class);
                 startActivity(intent);
             }
         });
@@ -193,11 +172,11 @@ public class AddTransactionActivity extends AppCompatActivity
                     noNoteInputText.setVisibility(View.INVISIBLE);
                     invalidInputAmountText.setVisibility(View.INVISIBLE);
 
-                    //save expense
-                    saveExpense(amountTextField.getText().toString(),noteTextField.getText().toString(),categoriesDropDownMenu.getItemAtPosition(categoriesDropDownMenu.getSelectedItemPosition()).toString());
+                    //save budget
+                    saveBudget(amountTextField.getText().toString(),noteTextField.getText().toString());
 
                     //moves onto the next page
-                    Intent intent = new Intent(AddTransactionActivity.this, TransactionConfirmationActivity.class);
+                    Intent intent = new Intent(AddBudgetActivity.this, TransactionConfirmationActivity.class);
                     startActivity(intent);
                 }
             }

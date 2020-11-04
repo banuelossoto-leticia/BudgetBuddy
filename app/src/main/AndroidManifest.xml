@@ -12,6 +12,7 @@
         <activity android:name=".TransactionDetails"></activity>
         <activity android:name=".TransactionConfirmationActivity" />
         <activity android:name=".AddTransactionActivity" />
+        <activity android:name=".AddBudgetActivity" />
         <activity android:name=".TransactionListActivity" />
         <activity android:name=".PieChartActivity" />
         <activity android:name=".SplashScreenActivity">

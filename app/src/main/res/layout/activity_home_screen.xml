@@ -58,19 +58,32 @@
         app:layout_constraintHorizontal_bias="0.967"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.844" />
+        app:layout_constraintVertical_bias="0.848" />
+
+    <ImageButton
+        android:id="@+id/addIncomeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:src="@drawable/add_button_but_red"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.715"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.848" />
 
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/bar_graph"
-        android:layout_height="300dp"
         android:layout_width="300dp"
+        android:layout_height="300dp"
         android:layout_marginStart="137dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="146dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/yearMonthDropDownMenu"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/yearMonthDropDownMenu" />
 
     <Spinner
         android:id="@+id/specificYearMonthDropDownMenu"
@@ -78,14 +91,14 @@
         android:layout_height="wrap_content"
         android:background="@drawable/drop_down_menu_background"
         android:dropDownSelector="@drawable/drop_down_menu_icon"
-        android:spinnerMode="dropdown"
         android:popupBackground="@color/monthdropdown"
+        android:spinnerMode="dropdown"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.923"
+        app:layout_constraintHorizontal_bias="0.927"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.197" />
+        app:layout_constraintVertical_bias="0.165" />
 
     <Spinner
         android:id="@+id/yearMonthDropDownMenu"
@@ -99,7 +112,7 @@
         app:layout_constraintHorizontal_bias="0.927"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.259" />
+        app:layout_constraintVertical_bias="0.234" />
 
     <TextView
         android:id="@+id/budgetLabel"
@@ -107,11 +120,12 @@
         android:layout_height="34dp"
         android:layout_marginStart="120dp"
         android:layout_marginEnd="6dp"
-        android:layout_marginBottom="160dp"
+        android:layout_marginBottom="176dp"
         android:text="Budget"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/pieChartButton"
+        app:layout_constraintHorizontal_bias="0.472"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -120,11 +134,12 @@
         android:layout_height="37dp"
         android:layout_marginStart="270dp"
         android:layout_marginEnd="28dp"
-        android:layout_marginBottom="156dp"
+        android:layout_marginBottom="172dp"
         android:text="Spent"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/addTransactionButton"
+        app:layout_constraintHorizontal_bias="0.56"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
