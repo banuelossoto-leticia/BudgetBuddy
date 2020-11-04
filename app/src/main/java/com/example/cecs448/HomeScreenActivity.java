@@ -22,6 +22,8 @@ public class HomeScreenActivity extends AppCompatActivity
 
     //this is for that transaction list is available throughout app
     static ArrayList<Transaction> transactions = new ArrayList<Transaction>();
+    //this is for categories to be available throughout app
+    static ArrayList<String> categories = new ArrayList<String>();
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -35,6 +37,15 @@ public class HomeScreenActivity extends AppCompatActivity
         transactions.add(new Transaction("BILLS",45.34, "This is electricity bill"));
         transactions.add(new Transaction("BILLS",400.00, "this is rent"));
         transactions.add(new Transaction("FUN",23.23,"go-kart"));
+
+        //LETY: this is dummy values for categories
+        //dummy data for the categories list
+        categories.add("BILLS");
+        categories.add("CLOTHES");
+        categories.add("FOOD");
+        categories.add("FUN");
+        categories.add("OTHER");
+        categories.add("ADD NEW CATEGORY");
 
         //binding xml elements
         monthDropDown=findViewById(R.id.yearMonthDropDownMenu);

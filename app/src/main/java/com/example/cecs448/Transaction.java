@@ -28,4 +28,16 @@ public class Transaction implements Serializable {
     public String getNote(){
         return this.note;
     }
+
+    public void setCategory(String newCategory){
+        this.category = newCategory;
+    }
+
+    public void setAmount(double newAmount){
+        this.amount = newAmount;
+    }
+
+    public void setNote(String newNote){
+        this.note = newNote;
+    }
 }

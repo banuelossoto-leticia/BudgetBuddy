@@ -19,13 +19,13 @@ public class TransactionDetails extends AppCompatActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_transaction_details);
 
         final Bundle bundle = getIntent().getExtras();
         final int transactionIndex = bundle.getInt("positionOfTransactionList");
 
         DecimalFormat df = new DecimalFormat("0.00");
 
-        setContentView(R.layout.activity_transaction_details);
         homeBtn = findViewById(R.id.homeButton6);
         pieBtn = findViewById(R.id.pieChartButton6);
         totalTextView = findViewById(R.id.totalTextView);
@@ -57,8 +57,8 @@ public class TransactionDetails extends AppCompatActivity implements View.OnClic
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TransactionDetails.this, EditTransactionActivity.class);
-                //attaching the transaction index to be deleted.
-                intent.putExtra("indexOfRemovedTransaction", transactionIndex);
+                //attaching the transaction index to be edited.
+                intent.putExtra("indexToBeEdited", transactionIndex);
                 startActivity(intent);
             }
         });

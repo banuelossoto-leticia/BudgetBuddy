@@ -84,7 +84,6 @@
         android:background="@drawable/drop_down_menu_background"
         android:colorBackground="#3C3F41"
         android:dropDownSelector="@drawable/drop_down_menu_icon"
-        android:textColor="#8D8D8D"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.802"

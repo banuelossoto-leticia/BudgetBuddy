@@ -21,18 +21,9 @@ public class AddTransactionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_transaction);
 
-        //dummy data for the categories list
-        ArrayList<String> categories = new ArrayList<String>();
-        categories.add("BILLS");
-        categories.add("CLOTHES");
-        categories.add("FOOD");
-        categories.add("FUN");
-        categories.add("OTHER");
-        categories.add("ADD NEW CATEGORY");
-
         //creating the drop down menu in order to use it in code.
         Spinner categoriesDropDownMenu = (Spinner) findViewById(R.id.categoryDropDownMenu);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),  android.R.layout.simple_spinner_dropdown_item, categories);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),  android.R.layout.simple_spinner_dropdown_item, HomeScreenActivity.categories);
         adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
         categoriesDropDownMenu.setAdapter(adapter);
 
@@ -40,9 +31,7 @@ public class AddTransactionActivity extends AppCompatActivity {
         final TextView invalidInputAmountText = (TextView) findViewById(R.id.invalidInputAmountText);
         final TextView oppsText = (TextView) findViewById(R.id.oppsText);
         final TextView noNoteInputText = (TextView) findViewById(R.id.noNoteInputText);
-
         final EditText noteTextField = (EditText) findViewById(R.id.noteTextField);
-
         final EditText amountTextField = (EditText) findViewById(R.id.amountTextField);
 
         //this is the button for the pieChartActivity from AddTransactionActivity
