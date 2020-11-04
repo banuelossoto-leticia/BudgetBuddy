@@ -33,11 +33,10 @@ public class TransactionDetails extends AppCompatActivity implements View.OnClic
         actualNoteTextView2 = findViewById(R.id.actualNoteTextView2);
 
         //changing the text view totalTextView to the transaction that was clicked
-        totalTextView.setText("$" + df.format(TransactionListActivity.
-                transactions.get(transactionIndex).getAmount()));
+        totalTextView.setText("$" + df.format(HomeScreenActivity.transactions.get(transactionIndex).getAmount()));
         //changing the category name of the transaction that was clicked
-        actualCategoryTextView.setText(TransactionListActivity.transactions.get(transactionIndex).getCategory());
-        actualNoteTextView2.setText(TransactionListActivity.transactions.get(transactionIndex).getNote());
+        actualCategoryTextView.setText(HomeScreenActivity.transactions.get(transactionIndex).getCategory());
+        actualNoteTextView2.setText(HomeScreenActivity.transactions.get(transactionIndex).getNote());
 
         homeBtn.setOnClickListener(this);
         pieBtn.setOnClickListener(this);
@@ -71,9 +70,11 @@ public class TransactionDetails extends AppCompatActivity implements View.OnClic
             @Override
             public void onClick(View v) {
                 //deletes the current transaction from the transaction array list
-                TransactionListActivity.transactions.remove(transactionIndex);
+                HomeScreenActivity.transactions.remove(transactionIndex);
                 Intent intent = new Intent(TransactionDetails.this, TransactionListActivity.class);
                 startActivity(intent);
+
+                //TODO: AFTER DELETING SAVE THE NEW TRANSACTION LIST INTO TEXT FILE
             }
         });
 

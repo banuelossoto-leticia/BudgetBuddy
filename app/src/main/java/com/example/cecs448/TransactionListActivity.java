@@ -22,7 +22,7 @@ public class TransactionListActivity extends AppCompatActivity implements View.O
     RecyclerView rvTransaction;
     TextView actualTotalSpentTextView;
     double totalSpent = 0;
-    static ArrayList<Transaction> transactions;
+
     TransactionsAdapter adapter;
 
     @Override
@@ -39,29 +39,9 @@ public class TransactionListActivity extends AppCompatActivity implements View.O
         //for the two place decimal
         DecimalFormat df = new DecimalFormat("0.00");
 
-        //creating dummy transactions
-        transactions = new ArrayList<Transaction>();
-
-        transactions.add(new Transaction("BILLS",45.34, "This is electricity bill"));
-        transactions.add(new Transaction("BILLS",400.00, "this is rent"));
-        transactions.add(new Transaction("FUN",23.23,"go-kart"));
-
-        /**
-        //will always check to see if user has deleted a transaction from the TransactionDetail activity
-        //if they have then the transaction is deleted
-        final Bundle bundle = getIntent().getExtras();
-        //checks to see if it empty or not
-        if(bundle.containsKey("indexOfRemovedTransaction")){
-            int indexToBeRemoved = bundle.getInt("indexOfRemovedTransaction");
-            transactions.remove(indexToBeRemoved);
-            //removes it because just in case it saves it
-            bundle.remove("indexOfRemovedTransaction");
-        }*/
-
-
         //creating recycler view
         //if it dosen't work try getApplicationContext()
-        adapter = new TransactionsAdapter(transactions, getApplicationContext(),this);
+        adapter = new TransactionsAdapter(HomeScreenActivity.transactions, getApplicationContext(),this);
 
         rvTransaction = (RecyclerView) findViewById(R.id.listRecycleView);
         rvTransaction.setHasFixedSize(true);
@@ -75,8 +55,8 @@ public class TransactionListActivity extends AppCompatActivity implements View.O
         //sets the actualTotalSpentTextView to be total
         //loops through the transaction list and adds up the total
 
-        for(int i = 0; i < transactions.size(); i++){
-            totalSpent = totalSpent + transactions.get(i).getAmount();
+        for(int i = 0; i < HomeScreenActivity.transactions.size(); i++){
+            totalSpent = totalSpent + HomeScreenActivity.transactions.get(i).getAmount();
         }
 
         actualTotalSpentTextView = (TextView) findViewById(R.id.actualTotalSpentTextView);
@@ -101,7 +81,7 @@ public class TransactionListActivity extends AppCompatActivity implements View.O
 
     @Override
     public void onTransactionClick(int position) {
-        transactions.get(position);
+        HomeScreenActivity.transactions.get(position);
         Intent intent = new Intent(TransactionListActivity.this, TransactionDetails.class);
 
         //attaching

@@ -12,11 +12,16 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 
 public class HomeScreenActivity extends AppCompatActivity
 {
     private Spinner monthDropDown,yearDropDown;
     private ImageView barGraph;
+
+    //this is for that transaction list is available throughout app
+    static ArrayList<Transaction> transactions = new ArrayList<Transaction>();
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -24,6 +29,12 @@ public class HomeScreenActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
+
+        //LETY: this is dummy value for transactions
+        //creating dummy transactions
+        transactions.add(new Transaction("BILLS",45.34, "This is electricity bill"));
+        transactions.add(new Transaction("BILLS",400.00, "this is rent"));
+        transactions.add(new Transaction("FUN",23.23,"go-kart"));
 
         //binding xml elements
         monthDropDown=findViewById(R.id.yearMonthDropDownMenu);
