@@ -22,7 +22,7 @@ public class TransactionListActivity extends AppCompatActivity implements View.O
     RecyclerView rvTransaction;
     TextView actualTotalSpentTextView;
     double totalSpent = 0;
-    ArrayList<Transaction> transactions;
+    static ArrayList<Transaction> transactions;
     TransactionsAdapter adapter;
 
     @Override
@@ -37,7 +37,7 @@ public class TransactionListActivity extends AppCompatActivity implements View.O
         pieBtn.setOnClickListener(this);
 
         //for the two place decimal
-        DecimalFormat df = new DecimalFormat("#.##");
+        DecimalFormat df = new DecimalFormat("0.00");
 
         //creating dummy transactions
         transactions = new ArrayList<Transaction>();
@@ -45,6 +45,19 @@ public class TransactionListActivity extends AppCompatActivity implements View.O
         transactions.add(new Transaction("BILLS",45.34, "This is electricity bill"));
         transactions.add(new Transaction("BILLS",400.00, "this is rent"));
         transactions.add(new Transaction("FUN",23.23,"go-kart"));
+
+        /**
+        //will always check to see if user has deleted a transaction from the TransactionDetail activity
+        //if they have then the transaction is deleted
+        final Bundle bundle = getIntent().getExtras();
+        //checks to see if it empty or not
+        if(bundle.containsKey("indexOfRemovedTransaction")){
+            int indexToBeRemoved = bundle.getInt("indexOfRemovedTransaction");
+            transactions.remove(indexToBeRemoved);
+            //removes it because just in case it saves it
+            bundle.remove("indexOfRemovedTransaction");
+        }*/
+
 
         //creating recycler view
         //if it dosen't work try getApplicationContext()
@@ -89,9 +102,10 @@ public class TransactionListActivity extends AppCompatActivity implements View.O
     @Override
     public void onTransactionClick(int position) {
         transactions.get(position);
-        Intent intent = new Intent(this, TransactionDetails.class);
+        Intent intent = new Intent(TransactionListActivity.this, TransactionDetails.class);
+
         //attaching
-        intent.putExtra("positionOfTransactionList",transactions.get(position));
+        intent.putExtra("positionOfTransactionList", position);
         startActivity(intent);
     }
 }
