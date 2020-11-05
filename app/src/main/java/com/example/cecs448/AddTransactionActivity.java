@@ -67,7 +67,7 @@ public class AddTransactionActivity extends AppCompatActivity
                 String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH").format(new Date(2020-1900,randomMonth,12));
 
                 //define the file to save
-                File file = new File(getFilesDir() + "budget.txt");
+                File file = new File(getFilesDir() + "expenses.txt");
                 //true indicates to append instead of overwrite
                 FileOutputStream fileout = new FileOutputStream(file, true);
                 OutputStreamWriter outputWriter = new OutputStreamWriter(fileout);
