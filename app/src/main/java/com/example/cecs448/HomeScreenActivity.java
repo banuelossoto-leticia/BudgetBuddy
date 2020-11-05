@@ -64,11 +64,8 @@ public class HomeScreenActivity extends AppCompatActivity
         if(!categories.contains("FUN")){
             categories.add("FUN");
         }
-        if(!categories.contains("OTHER")){
-            categories.add("OTHER");
-        }
-        if(!categories.contains("ADD NEW CATEGORY")){
-            categories.add("ADD NEW CATEGORY");
+        if(!categories.contains("MISC")){
+            categories.add("MISC");
         }
 
         //binding xml elements

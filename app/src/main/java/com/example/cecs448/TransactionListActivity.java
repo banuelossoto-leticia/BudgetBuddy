@@ -40,7 +40,6 @@ public class TransactionListActivity extends AppCompatActivity implements View.O
         DecimalFormat df = new DecimalFormat("0.00");
 
         //creating recycler view
-        //if it dosen't work try getApplicationContext()
         adapter = new TransactionsAdapter(HomeScreenActivity.transactions, getApplicationContext(),this);
 
         rvTransaction = (RecyclerView) findViewById(R.id.listRecycleView);
@@ -52,17 +51,12 @@ public class TransactionListActivity extends AppCompatActivity implements View.O
 
         //cvTransaction = (CardView) findViewById(R.id.cvTransaction);
 
-        //sets the actualTotalSpentTextView to be total
-        //loops through the transaction list and adds up the total
-
         for(int i = 0; i < HomeScreenActivity.transactions.size(); i++){
             totalSpent = totalSpent + HomeScreenActivity.transactions.get(i).getAmount();
         }
 
         actualTotalSpentTextView = (TextView) findViewById(R.id.actualTotalSpentTextView);
         actualTotalSpentTextView.setText("$" + String.valueOf(df.format(totalSpent)));
-
-
     }
 
     @Override

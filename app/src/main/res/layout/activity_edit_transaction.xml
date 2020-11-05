@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditTransactionActivity"
-    android:background="@drawable/transaction_detail_background">
+    android:background="@drawable/transaction_detail_background"
+    android:clickable="true"
+    tools:context=".EditTransactionActivity">
 
     <ImageButton
         android:id="@+id/back_button2"
@@ -39,8 +40,8 @@
         android:ems="10"
         android:gravity="top"
         android:hint=" Note goes here."
+        android:inputType="textShortMessage|textLongMessage"
         android:text="This is where the note will go. Anything in here."
-        android:inputType="textPersonName"
         android:textColor="#8D8D8D"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -111,9 +112,9 @@
         android:layout_height="wrap_content"
         android:background="@drawable/text_field_background"
         android:ems="10"
-        android:text="400.00"
         android:hint="Enter Amount "
         android:inputType="number|numberDecimal"
+        android:text="400.00"
         android:textAlignment="textEnd"
         android:textColor="#8D8D8D"
         android:textColorHint="#8D8D8D"
@@ -207,4 +208,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.99" />
+
+    <TextView
+        android:id="@+id/createNewCategoryTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:fontFamily="monospace"
+        android:text="create new category"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.829"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.45" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
