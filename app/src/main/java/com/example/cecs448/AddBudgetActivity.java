@@ -66,7 +66,7 @@ public class AddBudgetActivity extends AppCompatActivity
                 //true indicates to append instead of overwrite
                 FileOutputStream fileout = new FileOutputStream(file, true);
                 OutputStreamWriter outputWriter = new OutputStreamWriter(fileout);
-                //write expense info. Placing category and note inside quotes because we are using a comma as delimiter (a note or category might contain a comma?)
+                //write budget info. Placing category and note inside quotes because we are using a comma as delimiter (a note or category might contain a comma?)
                 outputWriter.write(randomAmount + "," + timeStamp + "," + "\"" + "TESTING" + "\"" + "\n");
                 outputWriter.close();
             } catch (java.io.IOException e) {
