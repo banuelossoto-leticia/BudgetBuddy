@@ -106,35 +106,6 @@
         app:layout_constraintVertical_bias="0.308" />
 
     <TextView
-        android:id="@+id/categoryTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Category:"
-        android:textColor="#8D8D8D"
-        android:textSize="28sp"
-        app:layout_constraintBottom_toBottomOf="@+id/pieChartButton4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.137"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.41" />
-
-    <Spinner
-        android:id="@+id/categoryDropDownMenu"
-        android:layout_width="190dp"
-        android:layout_height="45dp"
-        android:background="@drawable/drop_down_menu_background"
-        android:colorBackground="#3C3F41"
-        android:dropDownSelector="@drawable/drop_down_menu_icon"
-        android:textColor="#8D8D8D"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.802"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.400" />
-
-    <TextView
         android:id="@+id/noteTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -143,16 +114,15 @@
         android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.115"
+        app:layout_constraintHorizontal_bias="0.116"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.479"
-        />
+        app:layout_constraintVertical_bias="0.43" />
 
     <EditText
         android:id="@+id/noteTextField"
         android:layout_width="332dp"
-        android:layout_height="118dp"
+        android:layout_height="140dp"
         android:background="@drawable/note_text_field_background"
         android:ems="10"
         android:gravity="top"
@@ -164,7 +134,7 @@
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.622" />
+        app:layout_constraintVertical_bias="0.594" />
 
     <TextView
         android:id="@+id/invalidInputAmountText"
@@ -175,10 +145,10 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.351" />
+        app:layout_constraintVertical_bias="0.369" />
 
     <TextView
         android:id="@+id/oppsText"
