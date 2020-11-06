@@ -44,6 +44,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
     //this is for categories to be available throughout app
     static ArrayList<String> categories = new ArrayList<String>();
 
+    //put it here so that it only opens it once
     private void openExpenseFile(){
         DecimalFormat df = new DecimalFormat("0.00");
 
@@ -60,7 +61,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
             String cur = read.nextLine();
             String curArr[] = cur.split(",");
 
-            Double amountSpent = Double.parseDouble(df.format(curArr[0]));
+            String amountSpentString = curArr[0];
             String category = curArr[1];
             String year = curArr[2].substring(0,4);
             String month = curArr[2].substring(5,7);
@@ -68,6 +69,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
             String note = curArr[3];
 
             String date = month + "/" + day + "/" + year;
+            Double amountSpent = Double.parseDouble(amountSpentString);
 
             //saves transactions from text file into transactions object
             Transaction transaction = new Transaction(category, amountSpent, note, date);
@@ -76,15 +78,12 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
             transactions.add(transaction);
         }
     }
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
-
-        //this opens the file and saves the information into transactions
-        //openExpenseFile();
 
         //get time for NOW
         String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH").format(new Date());
@@ -125,20 +124,24 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         addTransactionButton.setOnClickListener(this);
         addIncomeButton.setOnClickListener(this);
 
+        //this opens the file and saves the information into transactions
+        if(SplashScreenActivity.appIsOpenFirstTime){
+            openExpenseFile();
+            SplashScreenActivity.appIsOpenFirstTime = false;
+        }
+
+
         //don't show view unless there is data inputted
         setBarGraphVisibility(View.INVISIBLE);
     }
 
     @Override
-    protected void onStart()
-    {
+    protected void onStart() {
         super.onStart();
 
-        monthDropDown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-        {
+        monthDropDown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-            {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 setBarGraphVisibility(View.INVISIBLE);   //don't show view unless there is data inputted
                 Object item = parent.getItemAtPosition(position);
                 monthListener(item); // user selected a new month
@@ -154,8 +157,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
     }
 
     @Override
-    public void onClick(View v)
-    {
+    public void onClick(View v) {
         switch (v.getId()){
             case R.id.pieChartButton:
                 startActivity(new Intent(getApplicationContext(), PieChartActivity.class));
@@ -176,8 +178,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
-    private void displayBarGraph()
-    {
+    private void displayBarGraph() {
         calculateSpending();
         barEntries = new ArrayList<>();
 
@@ -211,8 +212,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         leftAxis.setDrawLabels(false);
     }
 
-    private void calculateSpending()
-    {
+    private void calculateSpending() {
         Scanner read = null;
         double totalSpent = 0;
 
@@ -239,17 +239,14 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
             }
         }
 
-        if(totalSpent != 0)
-        {
+        if(totalSpent != 0) {
             spending = (float) totalSpent;
             budget = 500.0f;
             setBarGraphVisibility(View.VISIBLE); //show barGraph
         }
-
     }
 
-    private void monthListener(Object o)
-    {
+    private void monthListener(Object o) {
         String month = o.toString();
         curYearSelected = 2020;
 
@@ -267,8 +264,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         else if (month.equals("December")){ curMonthSelected = 12;}
     }
 
-    private void setTime()
-    {
+    private void setTime() {
         if(curMonth.equals("01")){monthDropDown.setSelection(0);}
         else if (curMonth.equals("02")){ monthDropDown.setSelection(1);}
         else if (curMonth.equals("03")){ monthDropDown.setSelection(2);}
@@ -283,8 +279,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         else if (curMonth.equals("12")){ monthDropDown.setSelection(11);}
     }
 
-    private void setBarGraphVisibility(int visibility)
-    {
+    private void setBarGraphVisibility(int visibility) {
         budgetLabel.setVisibility(visibility);
         spentLabel.setVisibility(visibility);
         barChart.setVisibility(visibility);

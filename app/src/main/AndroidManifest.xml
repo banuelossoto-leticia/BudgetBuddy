@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.cecs448">
-    <uses-permission android:name = "android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TransactionDetails"></activity>
+        <activity android:name=".TransactionUpdatedConfirmationActivity"></activity>
+        <activity android:name=".EditTransactionActivity" />
+        <activity android:name=".TransactionDetails" />
         <activity android:name=".TransactionConfirmationActivity" />
         <activity android:name=".AddTransactionActivity" />
         <activity android:name=".AddBudgetActivity" />

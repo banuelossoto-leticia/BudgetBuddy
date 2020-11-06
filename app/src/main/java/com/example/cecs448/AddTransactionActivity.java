@@ -36,10 +36,16 @@ public class AddTransactionActivity extends AppCompatActivity
             FileOutputStream fileout=new FileOutputStream(file, true);
             OutputStreamWriter outputWriter=new OutputStreamWriter(fileout);
             //write expense info. Placing category and note inside quotes because we are using a comma as delimiter (a note or category might contain a comma?)
-            outputWriter.write(amount+","+"\""+category+"\""+","+timeStamp+","+"\""+note+"\""+"\n");
+            outputWriter.write(amount + "," + category + "," + timeStamp + "," + note + "\n");
             outputWriter.close();
             //successful write toast
             Toast.makeText(getApplicationContext(),"Text file Saved to!"+ getFilesDir(),Toast.LENGTH_LONG).show();
+
+            /**LETY ADDED THIS*/
+            //creating a transaction to add to arrayList transactions
+            Transaction transaction = new Transaction(category, Double.parseDouble(amount), note, timeStamp);
+            //adding to transactions
+            HomeScreenActivity.transactions.add(transaction);
         }
 
         catch (java.io.IOException e)

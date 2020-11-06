@@ -6,9 +6,15 @@ import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.File;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class SplashScreenActivity extends AppCompatActivity {
 
     private static int SPLASH_TIME_OUT = 3000;
+    static boolean appIsOpenFirstTime = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
