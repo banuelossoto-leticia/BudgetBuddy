@@ -11,6 +11,7 @@ public class Transaction implements Serializable {
     private Double amount;
     private String note;
     private String date;
+    private String dateString;
 
     public Transaction(String cate, Double amoun, String not, String dat){
         this.category = cate;

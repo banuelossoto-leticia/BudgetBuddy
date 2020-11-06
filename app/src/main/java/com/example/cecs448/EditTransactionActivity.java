@@ -11,6 +11,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.FileWriter;
 import java.text.DecimalFormat;
 
 public class EditTransactionActivity extends AppCompatActivity {
@@ -83,9 +86,44 @@ public class EditTransactionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
 
-                //moves onto the next page
-                Intent intent = new Intent(EditTransactionActivity.this, TransactionUpdatedConfirmationActivity.class);
-                startActivity(intent);
+                oppsText.setVisibility(View.INVISIBLE);
+                noNoteInputText.setVisibility(View.INVISIBLE);
+                invalidInputAmountText.setVisibility(View.INVISIBLE);
+
+                //checking to see that edit text is filled out.
+                if((TextUtils.isEmpty(noteTextField.getText().toString())) || (TextUtils.isEmpty(amountTextField.getText().toString()))){
+                    //oppsText becomes visible because a user did not meet requirements.
+                    oppsText.setVisibility(View.VISIBLE);
+                    //checks to see which text field was invalid
+                    if(TextUtils.isEmpty(noteTextField.getText().toString())){
+                        noNoteInputText.setVisibility(View.VISIBLE);
+                    }
+                    if((TextUtils.isEmpty(amountTextField.getText().toString()))){
+                        invalidInputAmountText.setVisibility(View.VISIBLE);
+                    }
+
+                }else{
+                    //changes all errors to be invisible again
+                    oppsText.setVisibility(View.INVISIBLE);
+                    noNoteInputText.setVisibility(View.INVISIBLE);
+                    invalidInputAmountText.setVisibility(View.INVISIBLE);
+
+
+                    //updates the transaction in the arrayList
+                    HomeScreenActivity.transactions.get(transactionIndex).setCategory(HomeScreenActivity.categories.get(categoriesDropDownMenu.getSelectedItemPosition()));
+                    //updates the amount in the arrayList
+                    HomeScreenActivity.transactions.get(transactionIndex).setAmount(Double.parseDouble(amountTextField.getText().toString()));
+                    //updates the note in the arrayList
+                    HomeScreenActivity.transactions.get(transactionIndex).setNote(noteTextField.getText().toString());
+
+
+                    //TODO: AFTER DELETING SAVE THE NEW TRANSACTION LIST INTO TEXT FILE
+                    rewriteExpenseTextFile();
+
+                    //moves onto the next page
+                    Intent intent = new Intent(EditTransactionActivity.this, TransactionUpdatedConfirmationActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -97,5 +135,25 @@ public class EditTransactionActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void rewriteExpenseTextFile() {
+        try {
+            //define the file to save
+            FileWriter file = new FileWriter(getFilesDir()+"expenses.txt");
+
+            //write expense info. Placing category and note inside quotes because we are using a comma as delimiter (a note or category might contain a comma?)
+            for (Transaction transaction : HomeScreenActivity.transactions){
+                file.write(transaction.getAmount() + "," + transaction.getCategory() + "," + transaction.getDate() + "," + transaction.getNote() + "\n");
+            }
+
+            //closes the file
+            file.close();
+            //successful write toast
+            Toast.makeText(getApplicationContext(),"Transaction was updated!"+ getFilesDir(),Toast.LENGTH_LONG).show();
+        } catch (java.io.IOException e) {
+            //do something if an IOException occurs.
+            Toast.makeText(getApplicationContext(),"ERROR - Transaction could't be updated",Toast.LENGTH_LONG).show();
+        }
     }
 }

@@ -8,15 +8,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
-import java.io.OutputStreamWriter;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 
 public class TransactionDetails extends AppCompatActivity implements View.OnClickListener {
     ImageView homeBtn, pieBtn;
@@ -77,6 +70,7 @@ public class TransactionDetails extends AppCompatActivity implements View.OnClic
         deleteButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+
                 //deletes the current transaction from the transaction array list
                 HomeScreenActivity.transactions.remove(transactionIndex);
 
@@ -102,10 +96,10 @@ public class TransactionDetails extends AppCompatActivity implements View.OnClic
             //closes the file
             file.close();
             //successful write toast
-            Toast.makeText(getApplicationContext(),"Transaction was updated!"+ getFilesDir(),Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Transaction was deleted!"+ getFilesDir(),Toast.LENGTH_LONG).show();
         } catch (java.io.IOException e) {
             //do something if an IOException occurs.
-            Toast.makeText(getApplicationContext(),"ERROR - Text could't be updated",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"ERROR - Transaction could't be deleted",Toast.LENGTH_LONG).show();
         }
     }
 

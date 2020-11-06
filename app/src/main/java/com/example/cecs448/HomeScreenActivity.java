@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,6 +23,9 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -44,12 +48,78 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
     //this is for categories to be available throughout app
     static ArrayList<String> categories = new ArrayList<String>();
 
+    //checks to see if categories file exists or not
+    private void openCategoryFile()  {
+        try {
+            //define the file to save
+            File file = new File(getFilesDir()+"categories.txt");
+
+            boolean exist = file.exists();
+            //boolean exist = file.createNewFile();
+
+            /**checks to see if the file categories.txt file exists. if it does
+            not then it will create it. if it exists then it will open a file*/
+            if(exist){
+                Scanner reader = new Scanner(file);
+
+                //while there is a category in the text file it will while loop
+                while(reader.hasNext()){
+                    String category = reader.nextLine();
+
+                    if(!categories.contains(category)){
+                        categories.add(category);
+                    }
+                }
+
+                //closes file
+                reader.close();
+            }else{
+
+                //true indicates to append instead of overwrite
+                FileOutputStream fileOut = new FileOutputStream(file, true);
+                OutputStreamWriter outputWriter = new OutputStreamWriter(fileOut);
+
+                //writes new categories into the file
+                outputWriter.write("BILLS\n");
+                outputWriter.write("CLOTHES\n");
+                outputWriter.write("FOOD\n");
+                outputWriter.write("FUN\n");
+                outputWriter.write("OTHER\n");
+                outputWriter.write("MISC\n");
+
+                //closes the file
+                outputWriter.close();
+
+                //successful write toast
+                Toast.makeText(getApplicationContext(),"Text file Saved to!"+ getFilesDir(),Toast.LENGTH_LONG).show();
+
+                //adds default to categories
+                if(!categories.contains("BILLS")){
+                    categories.add("BILLS");
+                }
+                if(!categories.contains("CLOTHES")){
+                    categories.add("CLOTHES");
+                }
+                if(!categories.contains("FOOD")){
+                    categories.add("FOOD");
+                }
+                if(!categories.contains("FUN")){
+                    categories.add("FUN");
+                }
+                if(!categories.contains("MISC")){
+                    categories.add("MISC");
+                }
+            }
+        } catch (java.io.IOException e) {
+            //do something if an IOException occurs.
+            Toast.makeText(getApplicationContext(),"ERROR with categories.txt",Toast.LENGTH_LONG).show();
+        }
+    }
+
     //put it here so that it only opens it once
     private void openExpenseFile(){
-        DecimalFormat df = new DecimalFormat("0.00");
 
         Scanner read = null;
-        double totalSpent = 0;
 
         try {
             read = new Scanner(new File(getFilesDir()+"expenses.txt"));
@@ -63,12 +133,9 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
 
             String amountSpentString = curArr[0];
             String category = curArr[1];
-            String year = curArr[2].substring(0,4);
-            String month = curArr[2].substring(5,7);
-            String day = curArr[2].substring(8,10);
+            String date = curArr[2];
             String note = curArr[3];
 
-            String date = month + "/" + day + "/" + year;
             Double amountSpent = Double.parseDouble(amountSpentString);
 
             //saves transactions from text file into transactions object
@@ -84,6 +151,15 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
+
+        //this opens the file and saves the information into transactions
+        if(SplashScreenActivity.appIsOpenFirstTime){
+            openExpenseFile();
+            SplashScreenActivity.appIsOpenFirstTime = false;
+        }
+
+        //opens the categories.txt file
+        openCategoryFile();
 
         //get time for NOW
         String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH").format(new Date());
@@ -123,13 +199,6 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         transactionListButton.setOnClickListener(this);
         addTransactionButton.setOnClickListener(this);
         addIncomeButton.setOnClickListener(this);
-
-        //this opens the file and saves the information into transactions
-        if(SplashScreenActivity.appIsOpenFirstTime){
-            openExpenseFile();
-            SplashScreenActivity.appIsOpenFirstTime = false;
-        }
-
 
         //don't show view unless there is data inputted
         setBarGraphVisibility(View.INVISIBLE);
@@ -285,5 +354,3 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         barChart.setVisibility(visibility);
     }
 }
-
-
