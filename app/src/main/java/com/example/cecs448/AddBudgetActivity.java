@@ -82,7 +82,7 @@ public class AddBudgetActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_budget);
 
-        generateRandomData();
+        //generateRandomData();
 
         //creating the text views and edit texts to show if the user does not input all information needed to submit a transaction
         final TextView invalidInputAmountText = (TextView) findViewById(R.id.invalidInputAmountText);

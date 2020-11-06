@@ -22,6 +22,7 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
 import java.io.File;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -37,12 +38,53 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
     private ArrayList<BarEntry> barEntries; //to store all spending entries for bar graph
     private float budget, spending;  //for bar graph
     private TextView budgetLabel, spentLabel;
+
+    //this is for that transaction list is available throughout app
+    static ArrayList<Transaction> transactions = new ArrayList<Transaction>();
+    //this is for categories to be available throughout app
+    static ArrayList<String> categories = new ArrayList<String>();
+
+    private void openExpenseFile(){
+        DecimalFormat df = new DecimalFormat("0.00");
+
+        Scanner read = null;
+        double totalSpent = 0;
+
+        try {
+            read = new Scanner(new File(getFilesDir()+"expenses.txt"));
+        }catch (Exception e) {
+            System.out.println("");
+        }
+
+        while(read.hasNext()) {
+            String cur = read.nextLine();
+            String curArr[] = cur.split(",");
+
+            Double amountSpent = Double.parseDouble(df.format(curArr[0]));
+            String category = curArr[1];
+            String year = curArr[2].substring(0,4);
+            String month = curArr[2].substring(5,7);
+            String day = curArr[2].substring(8,10);
+            String note = curArr[3];
+
+            String date = month + "/" + day + "/" + year;
+
+            //saves transactions from text file into transactions object
+            Transaction transaction = new Transaction(category, amountSpent, note, date);
+
+            //adds the transaction into the arrayList transactions
+            transactions.add(transaction);
+        }
+    }
     
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
+
+        //this opens the file and saves the information into transactions
+        //openExpenseFile();
 
         //get time for NOW
         String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH").format(new Date());
