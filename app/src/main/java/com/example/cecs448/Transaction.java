@@ -5,7 +5,7 @@ import androidx.annotation.NonNull;
 import java.io.Serializable;
 
 //implements serializable because it will get use in multiple activities
-public class Transaction implements Serializable {
+public class Transaction implements Serializable, Comparable<Transaction> {
     //private classes
     private String category;
     private Double amount;
@@ -102,5 +102,10 @@ public class Transaction implements Serializable {
 
     public void setDate(String newDate){
         this.date = newDate;
+    }
+
+    @Override
+    public int compareTo(Transaction transaction) {
+        return transaction.getDate().compareTo(this.getDate());
     }
 }
