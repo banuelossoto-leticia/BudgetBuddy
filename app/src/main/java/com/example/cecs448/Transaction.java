@@ -1,7 +1,5 @@
 package com.example.cecs448;
 
-import androidx.annotation.NonNull;
-
 import java.io.Serializable;
 
 //implements serializable because it will get use in multiple activities

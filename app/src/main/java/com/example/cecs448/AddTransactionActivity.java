@@ -10,14 +10,11 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
@@ -25,6 +22,7 @@ public class AddTransactionActivity extends AppCompatActivity
 {
     //save to .txt file on device. To see it, go to "Device file explorer" on the bottom right corner of the IDE, then data/user/0/com.example.cecs448/files
     private void saveExpense(String amount, String note, String category) {
+
         try {
             //create a timestamp for the entry
             String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH").format(new Date());
@@ -43,7 +41,8 @@ public class AddTransactionActivity extends AppCompatActivity
             //creating a transaction to add to arrayList transactions
             Transaction transaction = new Transaction(category, Double.parseDouble(amount), note, timeStamp);
             //adding to transactions
-            HomeScreenActivity.transactions.add(transaction);
+            HomeScreenActivity.transactions.add(0,transaction);
+
         }
 
         catch (java.io.IOException e) {

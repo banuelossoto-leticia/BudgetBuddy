@@ -3,13 +3,7 @@ package com.example.cecs448;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.io.File;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class SplashScreenActivity extends AppCompatActivity {
 

@@ -10,7 +10,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import java.text.DecimalFormat;
 
-
 public class TransactionListActivity extends AppCompatActivity implements View.OnClickListener, TransactionsAdapter.OnTransactionListener {
     ImageButton homeBtn, pieBtn;
     RecyclerView rvTransaction;
