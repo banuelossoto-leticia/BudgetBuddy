@@ -40,7 +40,6 @@
         android:ems="10"
         android:gravity="top"
         android:hint=" Note goes here."
-        android:inputType="textShortMessage|textLongMessage"
         android:text="This is where the note will go. Anything in here."
         android:textColor="#8D8D8D"
         app:layout_constraintBottom_toBottomOf="parent"

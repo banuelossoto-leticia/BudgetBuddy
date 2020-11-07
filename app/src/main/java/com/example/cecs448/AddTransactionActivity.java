@@ -166,8 +166,7 @@ public class AddTransactionActivity extends AppCompatActivity
                 invalidInputAmountText.setVisibility(View.INVISIBLE);
 
                 //checking to see that edit text is filled out.
-                if((TextUtils.isEmpty(noteTextField.getText().toString())) || (TextUtils.isEmpty(amountTextField.getText().toString())))
-                {
+                if((TextUtils.isEmpty(noteTextField.getText().toString())) || (TextUtils.isEmpty(amountTextField.getText().toString()))) {
                     //oppsText becomes visible because a user did not meet requirements.
                     oppsText.setVisibility(View.VISIBLE);
                     //checks to see which text field was invalid
@@ -179,9 +178,7 @@ public class AddTransactionActivity extends AppCompatActivity
                     {
                         invalidInputAmountText.setVisibility(View.VISIBLE);
                     }
-                }
-
-                else {
+                } else {
                     //changes all errors to be invisible again
                     oppsText.setVisibility(View.INVISIBLE);
                     noNoteInputText.setVisibility(View.INVISIBLE);
