@@ -42,7 +42,8 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
         Transaction transaction = transactionList.get(position);
         holder.tvCategory.setText(transactionList.get(position).getCategory());
         holder.tvAmount.setText("$" + df.format(transactionList.get(position).getAmount()).toString());
-        //holder.tvTitle.setText(transaction.getCategory());
+        /***********************/
+        holder.tvDate.setText(transactionList.get(position).getDateToString());
     }
 
     @Override
@@ -58,6 +59,7 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
         public CardView cvTransaction;
         public TextView tvCategory;
         public TextView tvAmount;
+        public TextView tvDate;
         public OnTransactionListener onTransactionListener;
 
         public ViewHolder(View itemView, OnTransactionListener onTransactionListener) {
@@ -65,6 +67,7 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
             cvTransaction = (CardView) itemView.findViewById(R.id.cvTransaction);
             tvCategory = (TextView) itemView.findViewById(R.id.tvCategory);
             tvAmount = (TextView) itemView.findViewById(R.id.tvAmount);
+            tvDate = (TextView) itemView.findViewById(R.id.tvDate);
 
             this.onTransactionListener = onTransactionListener;
             itemView.setOnClickListener(this);

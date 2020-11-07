@@ -11,7 +11,6 @@ public class Transaction implements Serializable {
     private Double amount;
     private String note;
     private String date;
-    private String dateString;
 
     public Transaction(String cate, Double amoun, String not, String dat){
         this.category = cate;
@@ -34,6 +33,59 @@ public class Transaction implements Serializable {
 
     public String getDate(){
         return this.date;
+    }
+
+    public String getDateToString(){
+
+        String monthNumber = this.date.substring(5,7);
+        String month;
+
+        //depending on the month number, it will display the month
+        switch(monthNumber){
+            case "1":
+                month = "January ";
+                break;
+            case "2":
+                month = "February ";
+                break;
+            case "3":
+                month = "March ";
+                break;
+            case "4":
+                month = "April ";
+                break;
+            case "5":
+                month = "May ";
+                break;
+            case "6":
+                month = "June ";
+                break;
+            case "7":
+                month = "July ";
+                break;
+            case "8":
+                month = "August ";
+                break;
+            case "9":
+                month = "September ";
+                break;
+            case "10":
+                month = "October ";
+                break;
+            case "11":
+                month = "November ";
+                break;
+            case "12":
+                month = "December ";
+                break;
+            default:
+                month = "Error";
+        }
+        if(month.equals("error")){
+            return month;
+        }else{
+            return month + this.date.substring(8,10) + ", " + this.date.substring(0,4);
+        }
     }
 
     public void setCategory(String newCategory){

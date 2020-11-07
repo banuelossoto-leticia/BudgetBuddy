@@ -122,7 +122,7 @@ public class EditTransactionActivity extends AppCompatActivity {
                     HomeScreenActivity.transactions.get(transactionIndex).setNote(noteTextField.getText().toString());
 
 
-                    //TODO: AFTER DELETING SAVE THE NEW TRANSACTION LIST INTO TEXT FILE
+                    //AFTER DELETING SAVE THE NEW TRANSACTION LIST INTO TEXT FILE
                     rewriteExpenseTextFile();
 
                     //moves onto the next page
