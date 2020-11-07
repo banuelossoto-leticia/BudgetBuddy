@@ -24,26 +24,29 @@ import java.util.Random;
 public class AddTransactionActivity extends AppCompatActivity
 {
     //save to .txt file on device. To see it, go to "Device file explorer" on the bottom right corner of the IDE, then data/user/0/com.example.cecs448/files
-    private void saveExpense(String amount, String note, String category)
-    {
-        try
-        {
+    private void saveExpense(String amount, String note, String category) {
+        try {
             //create a timestamp for the entry
             String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH").format(new Date());
             //define the file to save
-            File file=new File(getFilesDir()+"expenses.txt");
+            File file = new File(getFilesDir()+"expenses.txt");
             //true indicates to append instead of overwrite
-            FileOutputStream fileout=new FileOutputStream(file, true);
-            OutputStreamWriter outputWriter=new OutputStreamWriter(fileout);
+            FileOutputStream fileout = new FileOutputStream(file, true);
+            OutputStreamWriter outputWriter = new OutputStreamWriter(fileout);
             //write expense info. Placing category and note inside quotes because we are using a comma as delimiter (a note or category might contain a comma?)
-            outputWriter.write(amount+","+"\""+category+"\""+","+timeStamp+","+"\""+note+"\""+"\n");
+            outputWriter.write(amount + "," + category + "," + timeStamp + "," + note + "\n");
             outputWriter.close();
             //successful write toast
             Toast.makeText(getApplicationContext(),"Text file Saved to!"+ getFilesDir(),Toast.LENGTH_LONG).show();
+
+            /**LETY ADDED THIS*/
+            //creating a transaction to add to arrayList transactions
+            Transaction transaction = new Transaction(category, Double.parseDouble(amount), note, timeStamp);
+            //adding to transactions
+            HomeScreenActivity.transactions.add(transaction);
         }
 
-        catch (java.io.IOException e)
-        {
+        catch (java.io.IOException e) {
             //do something if an IOException occurs.
             Toast.makeText(getApplicationContext(),"ERROR - Text could't be added",Toast.LENGTH_LONG).show();
         }
@@ -87,20 +90,11 @@ public class AddTransactionActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_transaction);
 
-        generateRandomData();
-
-        //dummy data for the categories list
-        ArrayList<String> categories = new ArrayList<String>();
-        categories.add("BILLS");
-        categories.add("CLOTHES");
-        categories.add("FOOD");
-        categories.add("FUN");
-        categories.add("OTHER");
-        categories.add("ADD NEW CATEGORY");
+        //generateRandomData();
 
         //creating the drop down menu in order to use it in code.
         final Spinner categoriesDropDownMenu = (Spinner) findViewById(R.id.categoryDropDownMenu);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),  android.R.layout.simple_spinner_dropdown_item, categories);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),  android.R.layout.simple_spinner_dropdown_item, HomeScreenActivity.categories);
         adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
         categoriesDropDownMenu.setAdapter(adapter);
 
@@ -160,6 +154,16 @@ public class AddTransactionActivity extends AppCompatActivity
             }
         });
 
+        //this is the clickable create new category
+        TextView newCategory = (TextView) findViewById(R.id.createNewCategoryTextView2);
+        newCategory.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(getApplicationContext(), CreateNewCategoryPopUpActivity.class);
+                startActivity(intent);
+            }
+        });
+
         //this is the submit_button
         ImageButton submitButton = (ImageButton) findViewById(R.id.submit_button);
         submitButton.setOnClickListener(new View.OnClickListener()
@@ -172,8 +176,7 @@ public class AddTransactionActivity extends AppCompatActivity
                 invalidInputAmountText.setVisibility(View.INVISIBLE);
 
                 //checking to see that edit text is filled out.
-                if((TextUtils.isEmpty(noteTextField.getText().toString())) || (TextUtils.isEmpty(amountTextField.getText().toString())))
-                {
+                if((TextUtils.isEmpty(noteTextField.getText().toString())) || (TextUtils.isEmpty(amountTextField.getText().toString()))) {
                     //oppsText becomes visible because a user did not meet requirements.
                     oppsText.setVisibility(View.VISIBLE);
                     //checks to see which text field was invalid
@@ -185,9 +188,7 @@ public class AddTransactionActivity extends AppCompatActivity
                     {
                         invalidInputAmountText.setVisibility(View.VISIBLE);
                     }
-                }
-
-                else {
+                } else {
                     //changes all errors to be invisible again
                     oppsText.setVisibility(View.INVISIBLE);
                     noNoteInputText.setVisibility(View.INVISIBLE);

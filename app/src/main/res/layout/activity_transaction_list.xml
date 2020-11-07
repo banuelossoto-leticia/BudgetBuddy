@@ -5,7 +5,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TransactionListActivity"
-    android:background="@drawable/background">
+    android:background="@drawable/transaction_list_background">
+
+    <TextView
+        android:id="@+id/totalSpentTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="monospace"
+        android:text="Total Spent:"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.826" />
+
+    <TextView
+        android:id="@+id/actualTotalSpentTextView"
+        android:layout_width="187dp"
+        android:layout_height="27dp"
+        android:fontFamily="monospace"
+        android:text="$783.23"
+        android:textAlignment="textEnd"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.856"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.826" />
 
     <ImageButton
         android:id="@+id/homeButton3"
@@ -46,15 +75,28 @@
         app:layout_constraintVertical_bias="0.99"
         android:src="@drawable/pie_button" />
 
-    <ImageView
-        android:id="@+id/listOfTrans"
-        android:layout_width="380dp"
-        android:layout_height="514dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="113dp"
-        android:layout_marginEnd="15dp"
+    <TextView
+        android:id="@+id/transactionsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="monospace"
+        android:text="Transactions"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/summary_view" />
+        app:layout_constraintVertical_bias="0.193" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listRecycleView"
+        android:layout_width="362dp"
+        android:layout_height="402dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.522" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
