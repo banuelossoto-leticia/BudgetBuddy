@@ -49,7 +49,7 @@ public class CreateNewCategoryPopUpActivity extends Activity {
                 /**checks to see if the input is already contained in categories or if its null or if its empty. If it is then it will display an error message.
                  * if the input is not empty not "" or it is not in categories then the new category will be put into categories and saved on the categories.txt*/
                 //does not meet requirements
-                if((categoryNameEditText.getText().toString() == "") || (TextUtils.isEmpty(categoryNameEditText.getText().toString()) || HomeScreenActivity.categories.contains(categoryNameEditText))){
+                if((categoryNameEditText.getText().toString() == "") || (TextUtils.isEmpty(categoryNameEditText.getText().toString()) || HomeScreenActivity.categories.contains(categoryNameEditText.getText().toString().toUpperCase()))){
 
                     //error is displayed
                     errorTextView.setVisibility(View.VISIBLE);

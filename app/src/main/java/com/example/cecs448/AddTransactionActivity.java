@@ -154,6 +154,16 @@ public class AddTransactionActivity extends AppCompatActivity
             }
         });
 
+        //this is the clickable create new category
+        TextView newCategory = (TextView) findViewById(R.id.createNewCategoryTextView2);
+        newCategory.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(getApplicationContext(), CreateNewCategoryPopUpActivity.class);
+                startActivity(intent);
+            }
+        });
+
         //this is the submit_button
         ImageButton submitButton = (ImageButton) findViewById(R.id.submit_button);
         submitButton.setOnClickListener(new View.OnClickListener()

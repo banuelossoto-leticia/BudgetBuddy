@@ -7,6 +7,20 @@
     tools:context=".AddTransactionActivity"
     android:background="@drawable/background_add_transaction">
 
+    <TextView
+        android:id="@+id/createNewCategoryTextView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:fontFamily="monospace"
+        android:text="create new category"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.829"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.45" />
+
     <ImageButton
         android:id="@+id/pieChartButton4"
         android:layout_width="wrap_content"
@@ -157,7 +171,6 @@
         android:ems="10"
         android:gravity="top"
         android:hint=" Note goes here."
-        android:inputType="textPersonName"
         android:textColor="#8D8D8D"
         app:layout_constraintBottom_toBottomOf="@+id/pieChartButton4"
         app:layout_constraintEnd_toEndOf="parent"
