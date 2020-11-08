@@ -47,6 +47,110 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
     static ArrayList<Transaction> transactions = new ArrayList<Transaction>();
     //this is for categories to be available throughout app
     static ArrayList<String> categories = new ArrayList<String>();
+    int count = 0;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home_screen);
+
+        //this opens the file and saves the information into transactions
+        if(SplashScreenActivity.appIsOpenFirstTime){
+            openExpenseFile();
+            SplashScreenActivity.appIsOpenFirstTime = false;
+        }
+
+        //opens the categories.txt file
+        openCategoryFile();
+
+        //get time for NOW
+        String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH").format(new Date());
+        curMonth = timeStamp.substring(5,7);
+        curYear = timeStamp.substring(0,4);
+
+        curMonthSelected = -1;
+        curYearSelected = 2020;
+        budget = -1;
+        spending = -1;
+
+        years=new String[]{"2020"};
+        //creates an adapter with the years
+        ArrayAdapter<String> adapterYears = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, years);
+        months = new String[]{"January", "February","March","April","May","June","July","August","September","October","November","December"};
+        //creates an adapter with the months
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, months);
+
+        // linking class variables to Views on layout files (xml files)
+        monthDropDown=findViewById(R.id.yearMonthDropDownMenu);
+        yearDropDown=findViewById(R.id.specificYearMonthDropDownMenu);
+        barChart = (BarChart)findViewById(R.id.bar_graph);
+        budgetLabel = findViewById(R.id.budgetLabel);
+        spentLabel = findViewById(R.id.spentLabel);
+        ImageButton pieChartButton = (ImageButton) findViewById(R.id.pieChartButton);
+        ImageButton transactionListButton = (ImageButton) findViewById(R.id.transactionListButton);
+        ImageButton addTransactionButton = (ImageButton) findViewById(R.id.addTransactionButton);
+        ImageButton addIncomeButton = (ImageButton) findViewById(R.id.addIncomeButton);
+
+        //provides the adapter for the spinner
+        monthDropDown.setAdapter(adapter);
+        yearDropDown.setAdapter(adapterYears);
+
+        //adding listener to buttons
+        pieChartButton.setOnClickListener(this);
+        transactionListButton.setOnClickListener(this);
+        addTransactionButton.setOnClickListener(this);
+        addIncomeButton.setOnClickListener(this);
+
+        //don't show view unless there is data inputted
+        setBarGraphVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        monthDropDown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                System.out.println("&&&&&&&&&&&&&&" + count + count + count + count + count + count + count + count + "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+                count++;
+
+                setBarGraphVisibility(View.INVISIBLE);   //don't show view unless there is data inputted
+                Object item = parent.getItemAtPosition(position);
+                monthListener(item); // user selected a new month
+                displayBarGraph();
+                barChart.invalidate(); // refreshing chart after changes
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {} //default override
+        });
+
+        setTime(); // set month and year drop down adapter to the current month and year
+        displayBarGraph();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.pieChartButton:
+                startActivity(new Intent(getApplicationContext(), PieChartActivity.class));
+                finish();
+                break;
+            case R.id.transactionListButton:
+                startActivity(new Intent(getApplicationContext(), TransactionListActivity.class));
+                finish();
+                break;
+            case R.id.addTransactionButton:
+                startActivity(new Intent(getApplicationContext(), AddTransactionActivity.class));
+                finish();
+                break;
+            case R.id.addIncomeButton:
+                startActivity(new Intent(getApplicationContext(), AddBudgetActivity.class));
+                finish();
+                break;
+        }
+    }
 
     //checks to see if categories file exists or not
     private void openCategoryFile()  {
@@ -58,7 +162,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
             //boolean exist = file.createNewFile();
 
             /**checks to see if the file categories.txt file exists. if it does
-            not then it will create it. if it exists then it will open a file*/
+             not then it will create it. if it exists then it will open a file*/
             if(exist){
                 Scanner reader = new Scanner(file);
 
@@ -146,106 +250,6 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_screen);
-
-        //this opens the file and saves the information into transactions
-        if(SplashScreenActivity.appIsOpenFirstTime){
-            openExpenseFile();
-            SplashScreenActivity.appIsOpenFirstTime = false;
-        }
-
-        //opens the categories.txt file
-        openCategoryFile();
-
-        //get time for NOW
-        String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH").format(new Date());
-        curMonth = timeStamp.substring(5,7);
-        curYear = timeStamp.substring(0,4);
-
-        curMonthSelected = -1;
-        curYearSelected = 2020;
-        budget = -1;
-        spending = -1;
-
-        years=new String[]{"2020"};
-        //creates an adapter with the years
-        ArrayAdapter<String> adapterYears = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, years);
-        months = new String[]{"January", "February","March","April","May","June","July","August","September","October","November","December"};
-        //creates an adapter with the months
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, months);
-
-        // linking class variables to Views on layout files (xml files)
-        monthDropDown=findViewById(R.id.yearMonthDropDownMenu);
-        yearDropDown=findViewById(R.id.specificYearMonthDropDownMenu);
-        barChart = (BarChart)findViewById(R.id.bar_graph);
-        budgetLabel = findViewById(R.id.budgetLabel);
-        spentLabel = findViewById(R.id.spentLabel);
-        ImageButton pieChartButton = (ImageButton) findViewById(R.id.pieChartButton);
-        ImageButton transactionListButton = (ImageButton) findViewById(R.id.transactionListButton);
-        ImageButton addTransactionButton = (ImageButton) findViewById(R.id.addTransactionButton);
-        ImageButton addIncomeButton = (ImageButton) findViewById(R.id.addIncomeButton);
-
-        //provides the adapter for the spinner
-        monthDropDown.setAdapter(adapter);
-        yearDropDown.setAdapter(adapterYears);
-
-        //adding listener to buttons
-        pieChartButton.setOnClickListener(this);
-        transactionListButton.setOnClickListener(this);
-        addTransactionButton.setOnClickListener(this);
-        addIncomeButton.setOnClickListener(this);
-
-        //don't show view unless there is data inputted
-        setBarGraphVisibility(View.INVISIBLE);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        monthDropDown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                setBarGraphVisibility(View.INVISIBLE);   //don't show view unless there is data inputted
-                Object item = parent.getItemAtPosition(position);
-                monthListener(item); // user selected a new month
-                displayBarGraph();
-                barChart.invalidate(); // refreshing chart after changes
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {} //default override
-        });
-
-        setTime(); // set month and year drop down adapter to the current month and year
-        displayBarGraph();
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.pieChartButton:
-                startActivity(new Intent(getApplicationContext(), PieChartActivity.class));
-                finish();
-                break;
-            case R.id.transactionListButton:
-                startActivity(new Intent(getApplicationContext(), TransactionListActivity.class));
-                finish();
-                break;
-            case R.id.addTransactionButton:
-                startActivity(new Intent(getApplicationContext(), AddTransactionActivity.class));
-                finish();
-                break;
-            case R.id.addIncomeButton:
-                startActivity(new Intent(getApplicationContext(), AddBudgetActivity.class));
-                finish();
-                break;
-        }
-    }
-
     private void displayBarGraph() {
         calculateSpending();
         barEntries = new ArrayList<>();
@@ -280,53 +284,52 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         leftAxis.setDrawLabels(false);
     }
 
+    private void calculateIncome(){
+
+    }
+
     private void calculateSpending() {
         Scanner read = null;
         double totalSpent = 0;
 
-
-
         try {
-            read = new Scanner(new File(getFilesDir()+"expenses.txt"));
-        }catch (Exception e) {
-            System.out.println("");
-        }
+            while (read.hasNext()) {
+                read = new Scanner(new File(getFilesDir()+"expenses.txt"));
+                System.out.println("-------------------------------");
+                String cur = read.nextLine();
+                String curArr[] = cur.split(",");
 
-        while(read.hasNext()){
+                String year = curArr[2].substring(0, 4);
+                String month = curArr[2].substring(5, 7);
 
-            System.out.println("-------------------------------");
-            String cur = read.nextLine();
-            String curArr[] = cur.split(",");
+                //if month is 06 then make it just 6
+                if (month.substring(0, 1).equals("0")) {
+                    month = month.substring(1, 2);
+                }
 
-            String year = curArr[2].substring(0,4);
-            String month = curArr[2].substring(5,7);
+                String amountSpent = curArr[0];
+                System.out.println("Line = " + cur);
+                System.out.println("Current year = " + year + " seleceted year = " + curYearSelected);
+                System.out.println("Does the year match ? " + year.equals(String.valueOf(curYearSelected)));
+                System.out.println("Current month = " + month + " seleceted year = " + curMonthSelected);
+                System.out.println("Does the year match ? " + month.equals(String.valueOf(curMonthSelected)));
 
-            //if month is 06 then make it just 6
-            if(month.substring(0,1).equals("0")){
-                month.substring(1,2);
+
+                //see if there is data for user selected month and year
+                if (year.equals(String.valueOf(curYearSelected)) && month.equals(String.valueOf(curMonthSelected))) {
+                    totalSpent += Double.valueOf(amountSpent);
+                }
+
+                System.out.println();
             }
 
-            String amountSpent = curArr[0];
-            System.out.println("Line = " + cur );
-            System.out.println("Current year = " + year  + " seleceted year = " + curYearSelected);
-            System.out.println("Does the year match ? " + year.equals(String.valueOf(curYearSelected)));
-            System.out.println("Current month = " + month  + " seleceted year = " + curMonthSelected);
-            System.out.println("Does the year match ? " + month.equals(String.valueOf(curMonthSelected)));
-
-
-
-            //see if there is data for user selected month and year
-            if(year.equals(String.valueOf(curYearSelected)) && month.equals(String.valueOf(curMonthSelected))) {
-                totalSpent += Double.valueOf(amountSpent);
+            if (totalSpent != 0) {
+                spending = (float) totalSpent;
+                budget = 500.0f;
+                setBarGraphVisibility(View.VISIBLE); //show barGraph
             }
-
-            System.out.println();
-        }
-
-        if(totalSpent != 0) {
-            spending = (float) totalSpent;
-            budget = 500.0f;
-            setBarGraphVisibility(View.VISIBLE); //show barGraph
+        }catch (Exception e){
+            System.out.println("//////////////////////////////////////\nexpenses.txt doesn't exist");
         }
     }
 
