@@ -30,8 +30,8 @@ public class EditTransactionActivity extends AppCompatActivity {
 
         //creating the drop down menu in order to use it in code.
         final Spinner categoriesDropDownMenu = (Spinner) findViewById(R.id.categoryDropDownMenu2);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, HomeScreenActivity.categories);
-        adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_dropdown_layout, HomeScreenActivity.categories);
+        adapter.setDropDownViewResource( R.layout.spinner_dropdown_layout);
         categoriesDropDownMenu.setAdapter(adapter);
 
         //creating the text views and edit texts to show if the user does not input all information needed to edit a transaction

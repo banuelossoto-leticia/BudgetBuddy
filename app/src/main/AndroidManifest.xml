@@ -11,10 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CreateNewCategoryPopUpActivity"
+        <activity
+            android:name=".FilterTransactionPopUpActivity"
             android:theme="@style/AppTheme.PopMe">
-
         </activity>
+        <activity
+            android:name=".CreateNewCategoryPopUpActivity"
+            android:theme="@style/AppTheme.PopMe"></activity>
         <activity android:name=".TransactionUpdatedConfirmationActivity" />
         <activity android:name=".EditTransactionActivity" />
         <activity android:name=".TransactionDetails" />
