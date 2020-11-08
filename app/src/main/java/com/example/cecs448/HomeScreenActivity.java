@@ -37,7 +37,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
     private ArrayList<BarEntry> barEntries; //to store all spending entries for bar graph
     private float budget, spending;  //for bar graph
     private TextView budgetLabel, spentLabel;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
