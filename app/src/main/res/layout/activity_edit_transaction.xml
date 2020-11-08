@@ -4,77 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddTransactionActivity"
-    android:background="@drawable/background_add_transaction">
-
-    <TextView
-        android:id="@+id/createNewCategoryTextView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:fontFamily="monospace"
-        android:text="create new category"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.829"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.45" />
+    android:background="@drawable/transaction_detail_background"
+    android:clickable="true"
+    tools:context=".EditTransactionActivity">
 
     <ImageButton
-        android:id="@+id/pieChartButton4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#00000000"
-        android:onClick="@+id/pieChartButton"
-        android:src="@drawable/pie_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.99" />
-
-    <ImageButton
-        android:id="@+id/transactionListButton4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#00000000"
-        android:src="@drawable/list_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.75"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.99" />
-
-    <ImageButton
-        android:id="@+id/homeButton4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#00000000"
-        android:src="@drawable/home_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.25"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.99" />
-
-    <ImageButton
-        android:id="@+id/submit_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.875"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.767"
-        app:srcCompat="@drawable/submit_button" />
-
-    <ImageButton
-        android:id="@+id/back_button"
+        android:id="@+id/back_button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -85,62 +20,70 @@
         app:layout_constraintVertical_bias="0.767"
         app:srcCompat="@drawable/back_button" />
 
-    <TextView
-        android:id="@+id/amountTextView"
+    <ImageButton
+        android:id="@+id/submit_button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="monospace"
-        android:text="Amount:"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="#8D8D8D"
-        android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.136"
+        app:layout_constraintHorizontal_bias="0.875"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.308" />
+        app:layout_constraintVertical_bias="0.767"
+        app:srcCompat="@drawable/submit_button" />
 
     <EditText
-        android:id="@+id/amountTextField"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/text_field_background"
+        android:id="@+id/noteTextField2"
+        android:layout_width="330dp"
+        android:layout_height="152dp"
+        android:background="@drawable/note_text_field_background"
         android:ems="10"
-        android:hint="Enter Amount "
-        android:inputType="number|numberDecimal"
-        android:textAlignment="textEnd"
+        android:gravity="top"
+        android:hint=" Note goes here."
+        android:text="This is where the note will go. Anything in here."
         android:textColor="#8D8D8D"
-        android:textColorHint="#8D8D8D"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.802"
+        app:layout_constraintHorizontal_bias="0.481"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.308" />
+        app:layout_constraintVertical_bias="0.618" />
 
     <TextView
-        android:id="@+id/categoryTextView"
+        android:id="@+id/noNoteInputText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="*No Note Input"
+        android:textColor="#A14646"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.125"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.696" />
+
+    <TextView
+        android:id="@+id/categoryTextView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Category:"
         android:textColor="#8D8D8D"
         android:textSize="28sp"
-        app:layout_constraintBottom_toBottomOf="@+id/pieChartButton4"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.137"
+        app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.41" />
+        app:layout_constraintVertical_bias="0.409" />
 
     <Spinner
-        android:id="@+id/categoryDropDownMenu"
-        android:layout_width="190dp"
+        android:id="@+id/categoryDropDownMenu2"
+        android:layout_width="200dp"
         android:layout_height="45dp"
         android:background="@drawable/drop_down_menu_background"
         android:colorBackground="#3C3F41"
         android:dropDownSelector="@drawable/drop_down_menu_icon"
-        android:textColor="#8D8D8D"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.802"
@@ -149,38 +92,7 @@
         app:layout_constraintVertical_bias="0.400" />
 
     <TextView
-        android:id="@+id/noteTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Note:"
-        android:textColor="#8D8D8D"
-        android:textSize="28sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.115"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.479"
-        />
-
-    <EditText
-        android:id="@+id/noteTextField"
-        android:layout_width="332dp"
-        android:layout_height="118dp"
-        android:background="@drawable/note_text_field_background"
-        android:ems="10"
-        android:gravity="top"
-        android:hint=" Note goes here."
-        android:textColor="#8D8D8D"
-        app:layout_constraintBottom_toBottomOf="@+id/pieChartButton4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.622" />
-
-    <TextView
-        android:id="@+id/invalidInputAmountText"
+        android:id="@+id/invalidInputAmountText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="*Invalid Input"
@@ -193,8 +105,27 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.351" />
 
+    <EditText
+        android:id="@+id/amountTextField2"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/text_field_background"
+        android:ems="10"
+        android:hint="Enter Amount "
+        android:inputType="number|numberDecimal"
+        android:text="400.00"
+        android:textAlignment="textEnd"
+        android:textColor="#8D8D8D"
+        android:textColorHint="#8D8D8D"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.802"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.308" />
+
     <TextView
-        android:id="@+id/oppsText"
+        android:id="@+id/oppsText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="*Opps Something Went Wrong. Try Again."
@@ -209,17 +140,86 @@
         app:layout_constraintVertical_bias="0.227" />
 
     <TextView
-        android:id="@+id/noNoteInputText"
+        android:id="@+id/amountTextView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="*No Note Input"
-        android:textColor="#A14646"
-        android:visibility="invisible"
+        android:fontFamily="monospace"
+        android:text="Amount:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="#8D8D8D"
+        android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.125"
+        app:layout_constraintHorizontal_bias="0.136"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.696" />
+        app:layout_constraintVertical_bias="0.308" />
+
+    <TextView
+        android:id="@+id/noteTextView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Note:"
+        android:textColor="#8D8D8D"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.115"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.479" />
+
+    <ImageButton
+        android:id="@+id/transactionListButton7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:src="@drawable/transactionlist_button_highlighted"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.99" />
+
+    <ImageButton
+        android:id="@+id/pieChartButton7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:src="@drawable/pie_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.99" />
+
+    <ImageButton
+        android:id="@+id/homeButton7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:src="@drawable/home_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.99" />
+
+    <TextView
+        android:id="@+id/createNewCategoryTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:fontFamily="monospace"
+        android:text="create new category"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.829"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.45" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,9 +8,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
@@ -82,7 +80,7 @@ public class AddBudgetActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_budget);
 
-        generateRandomData();
+        //generateRandomData();
 
         //creating the text views and edit texts to show if the user does not input all information needed to submit a transaction
         final TextView invalidInputAmountText = (TextView) findViewById(R.id.invalidInputAmountText);
