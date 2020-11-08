@@ -41,6 +41,8 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
     static ArrayList<Transaction> transactions = new ArrayList<Transaction>();
     //this is for categories to be available throughout app
     static ArrayList<String> categories = new ArrayList<String>();
+    //this is for filtered transactions to show on transaction list //used in transaction list activity
+    static ArrayList<Transaction> filteredTransactions = new ArrayList<Transaction>();
 
     //checks to see if categories file exists or not
     private void openCategoryFile()  {
@@ -164,6 +166,9 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         curYearSelected = -1;
         budget = -1;
         spending = -1;
+
+        //sets the filteredTransactions
+        filteredTransactions = getFilteredTransactions(curMonth, curYear);
 
         //binding xml elements
         monthDropDown=findViewById(R.id.yearMonthDropDownMenu);
@@ -346,5 +351,20 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         budgetLabel.setVisibility(visibility);
         spentLabel.setVisibility(visibility);
         barChart.setVisibility(visibility);
+    }
+
+    public static ArrayList<Transaction> getFilteredTransactions(String month, String year){
+
+        //will carry the filtered ArrayList
+        ArrayList<Transaction> tempTransactions = new ArrayList<Transaction>();
+
+        //will loop through the transactions arrayList and only get the transactions with the required month and year
+        for(Transaction transaction: HomeScreenActivity.transactions){
+            if(transaction.getDate().substring(0,4).equals(year) && transaction.getDate().substring(5,7).equals(month)){
+                tempTransactions.add(transaction);
+            }
+        }
+
+        return tempTransactions;
     }
 }
