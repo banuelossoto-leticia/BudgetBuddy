@@ -40,7 +40,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
     private String curMonth, curYear; // today month and year
     private BarChart barChart;
     private ArrayList<BarEntry> barEntries; //to store all spending entries for bar graph
-    private float budget, spending;  //for bar graph
+    private float income, spending;  //for bar graph
     private TextView budgetLabel, spentLabel;
 
     //this is for that transaction list is available throughout app
@@ -71,7 +71,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
 
         curMonthSelected = -1;
         curYearSelected = 2020;
-        budget = -1;
+        income = -1;
         spending = -1;
 
         years=new String[]{"2020"};
@@ -113,12 +113,11 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         monthDropDown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                System.out.println("&&&&&&&&&&&&&&" + count + count + count + count + count + count + count + count + "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-                count++;
-
                 setBarGraphVisibility(View.INVISIBLE);   //don't show view unless there is data inputted
                 Object item = parent.getItemAtPosition(position);
                 monthListener(item); // user selected a new month
+                spending = 0;
+                income = 0;
                 displayBarGraph();
                 barChart.invalidate(); // refreshing chart after changes
             }
@@ -252,10 +251,12 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
 
     private void displayBarGraph() {
         calculateSpending();
+        calculateIncome();
+
         barEntries = new ArrayList<>();
 
         //bar graph entries
-        barEntries.add(new BarEntry(0,budget));
+        barEntries.add(new BarEntry(0,income));
         barEntries.add(new BarEntry(1,spending));
 
         //bar graph settings
@@ -273,8 +274,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         XAxis xAxis = barChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setDrawGridLines(false);
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(new ArrayList<String>())); // hiding x axis labels by giving it an empty arrayList
-        xAxis.setCenterAxisLabels(true);
+        xAxis.setEnabled(false);
 
         // Y Axis settings
         YAxis leftAxis = barChart.getAxisLeft();
@@ -282,10 +282,44 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         rightAxis.setEnabled(false);
         leftAxis.setDrawGridLines(false);
         leftAxis.setDrawLabels(false);
+        leftAxis.setEnabled(false);
     }
 
     private void calculateIncome(){
+        Scanner read = null;
+        double totalIncome = 0;
 
+        try{
+            read = new Scanner(new File(getFilesDir()+"budget.txt"));
+
+            while (read.hasNext()) {
+                String cur = read.nextLine();
+                String curArr[] = cur.split(",");
+
+                String year = curArr[1].substring(0, 4);
+                String month = curArr[1].substring(5, 7);
+
+                //if month is 06 then make it just 6
+                if (month.substring(0, 1).equals("0")) {
+                    month = month.substring(1, 2);
+                }
+
+                String amountIncome = curArr[0];
+
+                //see if there is data for user selected month and year
+                if (year.equals(String.valueOf(curYearSelected)) && month.equals(String.valueOf(curMonthSelected))) {
+                    totalIncome += Double.valueOf(amountIncome);
+                }
+            }
+            if (totalIncome != 0) {
+                income = (float) totalIncome;
+                setBarGraphVisibility(View.VISIBLE); //show barGraph
+            }
+
+
+        }catch (Exception e){
+            System.out.println("\nbudget.txt doesn't exist");
+        }
     }
 
     private void calculateSpending() {
@@ -293,9 +327,9 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         double totalSpent = 0;
 
         try {
+            read = new Scanner(new File(getFilesDir()+"expenses.txt"));
+
             while (read.hasNext()) {
-                read = new Scanner(new File(getFilesDir()+"expenses.txt"));
-                System.out.println("-------------------------------");
                 String cur = read.nextLine();
                 String curArr[] = cur.split(",");
 
@@ -308,35 +342,23 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
                 }
 
                 String amountSpent = curArr[0];
-                System.out.println("Line = " + cur);
-                System.out.println("Current year = " + year + " seleceted year = " + curYearSelected);
-                System.out.println("Does the year match ? " + year.equals(String.valueOf(curYearSelected)));
-                System.out.println("Current month = " + month + " seleceted year = " + curMonthSelected);
-                System.out.println("Does the year match ? " + month.equals(String.valueOf(curMonthSelected)));
-
 
                 //see if there is data for user selected month and year
                 if (year.equals(String.valueOf(curYearSelected)) && month.equals(String.valueOf(curMonthSelected))) {
                     totalSpent += Double.valueOf(amountSpent);
                 }
-
-                System.out.println();
             }
-
             if (totalSpent != 0) {
                 spending = (float) totalSpent;
-                budget = 500.0f;
                 setBarGraphVisibility(View.VISIBLE); //show barGraph
             }
         }catch (Exception e){
-            System.out.println("//////////////////////////////////////\nexpenses.txt doesn't exist");
+            System.out.println("\nexpenses.txt doesn't exist");
         }
     }
 
     private void monthListener(Object o) {
         String month = o.toString();
-
-        System.out.println("------------------------------------------------------------------------------------------");
 
         if(month.equals("January")){curMonthSelected = 1;}
         else if (month.equals("February")){ curMonthSelected = 2;}
