@@ -388,4 +388,5 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         spentLabel.setVisibility(visibility);
         barChart.setVisibility(visibility);
     }
+
 }

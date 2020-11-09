@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,9 +28,10 @@ import java.util.Scanner;
 public class PieChartActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageButton homeButton, transactionListButton;
     private PieChart pieChart;
+    private TextView monthLabel;
+    private String[] months;
     private HashMap<String, Double> expenseEntries;
     private String curMonth, curYear;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,7 @@ public class PieChartActivity extends AppCompatActivity implements View.OnClickL
         expenseEntries = new HashMap<>();
 
         //get time for NOW
+        months = new String[]{"January", "February","March","April","May","June","July","August","September","October","November","December"};
         String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH").format(new Date());
         curMonth = timeStamp.substring(5,7);
         curYear = timeStamp.substring(0,4);
@@ -46,19 +49,16 @@ public class PieChartActivity extends AppCompatActivity implements View.OnClickL
         homeButton = findViewById(R.id.homeButton2);
         transactionListButton = findViewById(R.id.transactionListButton2);
         pieChart = findViewById(R.id.pie_chart);
+        monthLabel = findViewById(R.id.monthLabel);
 
         // add listener
         homeButton.setOnClickListener(this);
         transactionListButton.setOnClickListener(this);
 
         pieChart.setVisibility(View.INVISIBLE);
-    }
+        monthLabel.setText(months[Integer.valueOf(curMonth)-1]);
 
-    @Override
-    protected void onStart() {
-        super.onStart();
         displayPieChart();
-        System.out.println("------------------------------------");
 
     }
 
@@ -79,13 +79,15 @@ public class PieChartActivity extends AppCompatActivity implements View.OnClickL
     private void displayPieChart() {
         calculateSpending();
 
+
         pieChart.setUsePercentValues(true);
         pieChart.getDescription().setEnabled(false);
         pieChart.setExtraOffsets(5, 10, 5, 5);
         pieChart.setDragDecelerationFrictionCoef(0.95f);
         pieChart.setDrawHoleEnabled(true);
         pieChart.setHoleColor(Color.WHITE);
-        pieChart.setTransparentCircleRadius(55f);
+        pieChart.setTransparentCircleRadius(58f);
+        pieChart.setEntryLabelColor(Color.BLACK);
 
         ArrayList<PieEntry> entries = new ArrayList<>();
 
@@ -101,8 +103,7 @@ public class PieChartActivity extends AppCompatActivity implements View.OnClickL
         PieDataSet dataSet = new PieDataSet(entries,": CATEGORY");
         dataSet.setSliceSpace(3f);
         dataSet.setSelectionShift(5f);
-        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-        dataSet.setValueTextColor(Color.parseColor("#80252B"));
+        dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
 
         PieData data = new PieData(dataSet);
         data.setValueTextColor(Color.parseColor("#1800fc"));
@@ -155,14 +156,6 @@ public class PieChartActivity extends AppCompatActivity implements View.OnClickL
                         }
                 }
             }
-
-            for(String name: expenseEntries.keySet()){
-                String key = name.toString();
-                Double vaule = expenseEntries.get(name);
-
-                System.out.println("Key = " + key + " Value = " + String.valueOf(vaule));
-            }
-
             }catch(Exception e) {
                     System.out.println("/\nexpenses.txt doesn't exist");
             }
