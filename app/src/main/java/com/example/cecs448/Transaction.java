@@ -5,7 +5,7 @@ import androidx.annotation.NonNull;
 import java.io.Serializable;
 
 //implements serializable because it will get use in multiple activities
-public class Transaction implements Serializable {
+public class Transaction implements Serializable{
     //private classes
     private String category;
     private Double amount;

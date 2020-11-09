@@ -79,8 +79,6 @@ public class PieChartActivity extends AppCompatActivity implements View.OnClickL
     private void displayPieChart() {
         calculateSpending();
 
-
-        pieChart.setUsePercentValues(true);
         pieChart.getDescription().setEnabled(false);
         pieChart.setExtraOffsets(5, 10, 5, 5);
         pieChart.setDragDecelerationFrictionCoef(0.95f);
@@ -94,9 +92,8 @@ public class PieChartActivity extends AppCompatActivity implements View.OnClickL
         if(!expenseEntries.isEmpty()){
             for(String name: expenseEntries.keySet()) {
                 String key = name.toString();
-                Double value = expenseEntries.get(name);
-
-                entries.add(new PieEntry(Float.valueOf(String.valueOf(value)), key));
+                double value = expenseEntries.get(name);
+                entries.add(new PieEntry((float)value, key));
             }
         }
 
@@ -107,7 +104,7 @@ public class PieChartActivity extends AppCompatActivity implements View.OnClickL
 
         PieData data = new PieData(dataSet);
         data.setValueTextColor(Color.parseColor("#1800fc"));
-        data.setValueTextSize(25f);
+        data.setValueTextSize(15f);
 
         pieChart.setData(data);
 
