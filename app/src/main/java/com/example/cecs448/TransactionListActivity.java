@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Filter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import java.text.DecimalFormat;
-
 
 public class TransactionListActivity extends AppCompatActivity implements View.OnClickListener, TransactionsAdapter.OnTransactionListener {
     ImageButton homeBtn, pieBtn;
@@ -34,7 +34,7 @@ public class TransactionListActivity extends AppCompatActivity implements View.O
         DecimalFormat df = new DecimalFormat("0.00");
 
         //creating recycler view
-        adapter = new TransactionsAdapter(HomeScreenActivity.transactions, getApplicationContext(),this);
+        adapter = new TransactionsAdapter(HomeScreenActivity.filteredTransactions, getApplicationContext(),this);
 
         rvTransaction = (RecyclerView) findViewById(R.id.listRecycleView);
         rvTransaction.setHasFixedSize(true);
@@ -45,12 +45,22 @@ public class TransactionListActivity extends AppCompatActivity implements View.O
 
         //cvTransaction = (CardView) findViewById(R.id.cvTransaction);
 
-        for(int i = 0; i < HomeScreenActivity.transactions.size(); i++){
-            totalSpent = totalSpent + HomeScreenActivity.transactions.get(i).getAmount();
+        for(int i = 0; i < HomeScreenActivity.filteredTransactions.size(); i++){
+            totalSpent = totalSpent + HomeScreenActivity.filteredTransactions.get(i).getAmount();
         }
 
         actualTotalSpentTextView = (TextView) findViewById(R.id.actualTotalSpentTextView);
         actualTotalSpentTextView.setText("$" + String.valueOf(df.format(totalSpent)));
+
+        //this is the clickable filter transaction
+        TextView newCategory = (TextView) findViewById(R.id.filterTextView);
+        newCategory.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(getApplicationContext(), FilterTransactionPopUpActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -69,7 +79,7 @@ public class TransactionListActivity extends AppCompatActivity implements View.O
 
     @Override
     public void onTransactionClick(int position) {
-        HomeScreenActivity.transactions.get(position);
+        HomeScreenActivity.filteredTransactions.get(position);
         Intent intent = new Intent(TransactionListActivity.this, TransactionDetails.class);
 
         //attaching

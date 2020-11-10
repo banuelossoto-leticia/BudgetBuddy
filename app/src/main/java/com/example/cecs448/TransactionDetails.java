@@ -37,7 +37,7 @@ public class TransactionDetails extends AppCompatActivity implements View.OnClic
         //changing the category name of the transaction that was clicked
         actualCategoryTextView.setText(HomeScreenActivity.transactions.get(transactionIndex).getCategory());
         actualNoteTextView2.setText(HomeScreenActivity.transactions.get(transactionIndex).getNote());
-        actualDateTextView.setText(HomeScreenActivity.transactions.get(transactionIndex).getDate());
+        actualDateTextView.setText(HomeScreenActivity.transactions.get(transactionIndex).getDateToString());
 
         homeBtn.setOnClickListener(this);
         pieBtn.setOnClickListener(this);

@@ -10,9 +10,7 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
@@ -24,6 +22,7 @@ public class AddTransactionActivity extends AppCompatActivity
 {
     //save to .txt file on device. To see it, go to "Device file explorer" on the bottom right corner of the IDE, then data/user/0/com.example.cecs448/files
     private void saveExpense(String amount, String note, String category) {
+
         try {
             //create a timestamp for the entry
             String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH").format(new Date());
@@ -42,7 +41,8 @@ public class AddTransactionActivity extends AppCompatActivity
             //creating a transaction to add to arrayList transactions
             Transaction transaction = new Transaction(category, Double.parseDouble(amount), note, timeStamp);
             //adding to transactions
-            HomeScreenActivity.transactions.add(transaction);
+            HomeScreenActivity.transactions.add(0,transaction);
+
         }
 
         catch (java.io.IOException e) {
@@ -93,8 +93,8 @@ public class AddTransactionActivity extends AppCompatActivity
 
         //creating the drop down menu in order to use it in code.
         final Spinner categoriesDropDownMenu = (Spinner) findViewById(R.id.categoryDropDownMenu);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),  android.R.layout.simple_spinner_dropdown_item, HomeScreenActivity.categories);
-        adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_dropdown_layout, HomeScreenActivity.categories);
+        adapter.setDropDownViewResource( R.layout.spinner_dropdown_layout);
         categoriesDropDownMenu.setAdapter(adapter);
 
         //creating the text views and edit texts to show if the user does not input all information needed to submit a transaction

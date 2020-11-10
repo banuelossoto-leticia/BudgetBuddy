@@ -1,23 +1,16 @@
 package com.example.cecs448;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.FileWriter;
 import java.text.DecimalFormat;
 
@@ -37,8 +30,8 @@ public class EditTransactionActivity extends AppCompatActivity {
 
         //creating the drop down menu in order to use it in code.
         final Spinner categoriesDropDownMenu = (Spinner) findViewById(R.id.categoryDropDownMenu2);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, HomeScreenActivity.categories);
-        adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_dropdown_layout, HomeScreenActivity.categories);
+        adapter.setDropDownViewResource( R.layout.spinner_dropdown_layout);
         categoriesDropDownMenu.setAdapter(adapter);
 
         //creating the text views and edit texts to show if the user does not input all information needed to edit a transaction
@@ -122,7 +115,7 @@ public class EditTransactionActivity extends AppCompatActivity {
                     HomeScreenActivity.transactions.get(transactionIndex).setNote(noteTextField.getText().toString());
 
 
-                    //TODO: AFTER DELETING SAVE THE NEW TRANSACTION LIST INTO TEXT FILE
+                    //AFTER DELETING SAVE THE NEW TRANSACTION LIST INTO TEXT FILE
                     rewriteExpenseTextFile();
 
                     //moves onto the next page

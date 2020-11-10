@@ -1,16 +1,12 @@
-
 package com.example.cecs448;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -42,7 +38,8 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
         Transaction transaction = transactionList.get(position);
         holder.tvCategory.setText(transactionList.get(position).getCategory());
         holder.tvAmount.setText("$" + df.format(transactionList.get(position).getAmount()).toString());
-        //holder.tvTitle.setText(transaction.getCategory());
+        /***********************/
+        holder.tvDate.setText(transactionList.get(position).getDateToString());
     }
 
     @Override
@@ -58,6 +55,7 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
         public CardView cvTransaction;
         public TextView tvCategory;
         public TextView tvAmount;
+        public TextView tvDate;
         public OnTransactionListener onTransactionListener;
 
         public ViewHolder(View itemView, OnTransactionListener onTransactionListener) {
@@ -65,6 +63,7 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
             cvTransaction = (CardView) itemView.findViewById(R.id.cvTransaction);
             tvCategory = (TextView) itemView.findViewById(R.id.tvCategory);
             tvAmount = (TextView) itemView.findViewById(R.id.tvAmount);
+            tvDate = (TextView) itemView.findViewById(R.id.tvDate);
 
             this.onTransactionListener = onTransactionListener;
             itemView.setOnClickListener(this);
