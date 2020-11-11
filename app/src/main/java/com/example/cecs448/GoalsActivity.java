@@ -18,9 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
 
 public class GoalsActivity extends AppCompatActivity
@@ -30,7 +28,7 @@ public class GoalsActivity extends AppCompatActivity
     private ConstraintLayout pop_up;
     private TextView no_goals, main_goal, edit_goal_name, curr_limit, edit_limit, goal_category;
     private EditText new_limit;
-    private Button edit_goal,submit_edit,back;
+    private Button edit_goal,submit_edit,back, delete;
     private RecyclerView goalsRecycler;
     private ImageView createGoal;
     private GoalAdapter goalsAdapter=null;
@@ -151,6 +149,7 @@ public class GoalsActivity extends AppCompatActivity
         edit_limit=findViewById(R.id.new_lim);
         goal_category=findViewById(R.id.goal_category);
         new_limit=findViewById(R.id.new_limit);
+        delete=findViewById(R.id.delete_button);
 
         //checks whether to display the error message or not
         checkIfNoGoalsExist();
@@ -197,6 +196,28 @@ public class GoalsActivity extends AppCompatActivity
             }
         });
 
+        //deletes a goal
+        delete.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                //deletes the goal from the list
+                goals.remove(selected_goal);
+                //deletes the goals txt file
+                deleteFile();
+                //rewrites it to save the edit
+                rewriteFile();
+                //opens the recycler and hides the popup
+                goalsAdapter.notifyDataSetChanged();
+                goal_list.setVisibility(View.VISIBLE);
+                pop_up.setVisibility(View.INVISIBLE);
+                createGoal.setVisibility(View.VISIBLE);
+                //checks whether to display the error message or not
+                checkIfNoGoalsExist();
+            }
+        });
+
         //allows the limit of a goal to be edited
         edit_goal.setOnClickListener(new View.OnClickListener()
         {
@@ -204,7 +225,9 @@ public class GoalsActivity extends AppCompatActivity
             public void onClick(View view)
             {
                 new_limit.setEnabled(true);
-                submit_edit.setEnabled(true);
+                delete.setVisibility(View.VISIBLE);
+                submit_edit.setVisibility(View.VISIBLE);
+                edit_goal.setVisibility(View.INVISIBLE);
                 edit_goal_name.setVisibility(View.VISIBLE);
                 main_goal.setVisibility(View.INVISIBLE);
                 curr_limit.setVisibility(View.INVISIBLE);
@@ -218,11 +241,13 @@ public class GoalsActivity extends AppCompatActivity
             @Override
             public void onItemClick(int position)
             {
+                edit_goal.setVisibility(View.VISIBLE);
                 selected_goal=goals.get(position);
                 new_limit.setText(selected_goal.getLimit());
                 new_limit.setEnabled(false);
                 goal_category.setText(selected_goal.getCategory());
                 goal_category.setEnabled(false);
+                delete.setVisibility(View.INVISIBLE);
                 curr_limit.setVisibility(View.VISIBLE);
                 edit_limit.setVisibility(View.INVISIBLE);
                 goal_list.setVisibility(View.INVISIBLE);
@@ -230,7 +255,7 @@ public class GoalsActivity extends AppCompatActivity
                 edit_goal_name.setVisibility(View.INVISIBLE);
                 main_goal.setVisibility(View.VISIBLE);
                 createGoal.setVisibility(View.INVISIBLE);
-                submit_edit.setEnabled(false);
+                submit_edit.setVisibility(View.INVISIBLE);
             }
         });
 
