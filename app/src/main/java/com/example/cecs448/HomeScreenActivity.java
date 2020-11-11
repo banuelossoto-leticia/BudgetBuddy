@@ -7,10 +7,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
@@ -19,6 +22,7 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
@@ -41,6 +45,8 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
     static ArrayList<Transaction> transactions = new ArrayList<Transaction>();
     //this is for categories to be available throughout app
     static ArrayList<String> categories = new ArrayList<String>();
+    //this is for filtered transactions to show on transaction list //used in transaction list activity
+    static ArrayList<Transaction> filteredTransactions = new ArrayList<Transaction>();
 
     //checks to see if categories file exists or not
     private void openCategoryFile()  {
@@ -148,7 +154,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
 
         //this opens the file and saves the information into transactions
         if(SplashScreenActivity.appIsOpenFirstTime){
-            openExpenseFile();
+            //openExpenseFile();
             SplashScreenActivity.appIsOpenFirstTime = false;
         }
 
@@ -164,6 +170,9 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         curYearSelected = -1;
         budget = -1;
         spending = -1;
+
+        //sets the filteredTransactions
+        filteredTransactions = getFilteredTransactions(curMonth, curYear);
 
         //binding xml elements
         monthDropDown=findViewById(R.id.yearMonthDropDownMenu);
@@ -187,12 +196,14 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         ImageButton transactionListButton = (ImageButton) findViewById(R.id.transactionListButton);
         ImageButton addTransactionButton = (ImageButton) findViewById(R.id.addTransactionButton);
         ImageButton addIncomeButton = (ImageButton) findViewById(R.id.addIncomeButton);
+        ImageView goalsButton=(ImageView) findViewById(R.id.goals);
 
         //adding listener to buttons
         pieChartButton.setOnClickListener(this);
         transactionListButton.setOnClickListener(this);
         addTransactionButton.setOnClickListener(this);
         addIncomeButton.setOnClickListener(this);
+        goalsButton.setOnClickListener(this);
 
         //don't show view unless there is data inputted
         setBarGraphVisibility(View.INVISIBLE);
@@ -237,6 +248,9 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
             case R.id.addIncomeButton:
                 startActivity(new Intent(getApplicationContext(), AddBudgetActivity.class));
                 finish();
+                break;
+            case R.id.goals:
+                startActivity(new Intent(getApplicationContext(), GoalsActivity.class));
                 break;
         }
     }
@@ -346,5 +360,20 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         budgetLabel.setVisibility(visibility);
         spentLabel.setVisibility(visibility);
         barChart.setVisibility(visibility);
+    }
+
+    public static ArrayList<Transaction> getFilteredTransactions(String month, String year){
+
+        //will carry the filtered ArrayList
+        ArrayList<Transaction> tempTransactions = new ArrayList<Transaction>();
+
+        //will loop through the transactions arrayList and only get the transactions with the required month and year
+        for(Transaction transaction: HomeScreenActivity.transactions){
+            if(transaction.getDate().substring(0,4).equals(year) && transaction.getDate().substring(5,7).equals(month)){
+                tempTransactions.add(transaction);
+            }
+        }
+
+        return tempTransactions;
     }
 }

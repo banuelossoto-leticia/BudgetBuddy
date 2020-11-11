@@ -10,7 +10,9 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
@@ -89,7 +91,7 @@ public class AddTransactionActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_transaction);
 
-        //generateRandomData();
+        generateRandomData();
 
         //creating the drop down menu in order to use it in code.
         final Spinner categoriesDropDownMenu = (Spinner) findViewById(R.id.categoryDropDownMenu);
