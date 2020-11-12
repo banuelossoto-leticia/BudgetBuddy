@@ -26,6 +26,9 @@
         <activity android:name=".AddBudgetActivity" />
         <activity android:name=".TransactionListActivity" />
         <activity android:name=".PieChartActivity" />
+        <activity android:name=".GoalsActivity"/>
+        <activity android:name=".CreateGoalActivity"/>
+        <activity android:name=".GoalConfirmation"/>
         <activity android:name=".SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -8,14 +8,14 @@ import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class TransactionUpdatedConfirmationActivity extends AppCompatActivity {
+public class GoalConfirmation extends AppCompatActivity {
 
     private static int SPLASH_TIME_OUT = 3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_transaction_updated_confirmation);
+        setContentView(R.layout.activity_goal_confirmation);
 
         new Handler().postDelayed(new Runnable(){
 
@@ -23,7 +23,7 @@ public class TransactionUpdatedConfirmationActivity extends AppCompatActivity {
             public void run() {
                 //this method will be executed once the timer is over
                 //this is for the splash screen, start app with HomeScreenActivity
-                Intent i = new Intent(TransactionUpdatedConfirmationActivity.this, TransactionListActivity.class);
+                Intent i = new Intent(GoalConfirmation.this, HomeScreenActivity.class);
                 startActivity(i);
 
                 //closes this activity
@@ -31,24 +31,25 @@ public class TransactionUpdatedConfirmationActivity extends AppCompatActivity {
             }
         }, SPLASH_TIME_OUT);
 
-        //this is the button for the HomeScreenActivity from TransactionUpdatedConfirmationActivity
-        ImageButton homeButton = (ImageButton) findViewById(R.id.homeButton8);
-        homeButton.setOnClickListener(new View.OnClickListener(){
+        //this is the button for the pieChartActivity from AddTransactionActivity
+        ImageButton pieChartButton = (ImageButton) findViewById(R.id.pieChartButton6);
+        pieChartButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(TransactionUpdatedConfirmationActivity.this, HomeScreenActivity.class);
+                Intent intent = new Intent(GoalConfirmation.this, PieChartActivity.class);
                 startActivity(intent);
             }
         });
 
-        //this the button for the PieChartActivity from TransactionUpdatedConfirmationActivity
-        ImageButton pieChartButton = (ImageButton) findViewById(R.id.pieChartButton8);
-        pieChartButton.setOnClickListener(new View.OnClickListener(){
+        //this the button for the transactionListActivity from AddTransactionActivity
+        ImageButton transactionListButton = (ImageButton) findViewById(R.id.transactionListButton6);
+        transactionListButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(TransactionUpdatedConfirmationActivity.this, PieChartActivity.class);
+                Intent intent = new Intent(GoalConfirmation.this, TransactionListActivity.class);
                 startActivity(intent);
             }
         });
     }
 }
+

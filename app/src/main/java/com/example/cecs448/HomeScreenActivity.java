@@ -7,10 +7,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
@@ -19,6 +22,7 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
@@ -150,7 +154,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
 
         //this opens the file and saves the information into transactions
         if(SplashScreenActivity.appIsOpenFirstTime){
-            openExpenseFile();
+            //openExpenseFile();
             SplashScreenActivity.appIsOpenFirstTime = false;
         }
 
@@ -190,6 +194,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         ImageButton transactionListButton = (ImageButton) findViewById(R.id.transactionListButton);
         ImageButton addTransactionButton = (ImageButton) findViewById(R.id.addTransactionButton);
         ImageButton addIncomeButton = (ImageButton) findViewById(R.id.addIncomeButton);
+        ImageView goalsButton=(ImageView) findViewById(R.id.goals);
 
         //provides the adapter for the spinner
         monthDropDown.setAdapter(adapter);
@@ -200,6 +205,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         transactionListButton.setOnClickListener(this);
         addTransactionButton.setOnClickListener(this);
         addIncomeButton.setOnClickListener(this);
+        goalsButton.setOnClickListener(this);
 
         //don't show view unless there is data inputted
         setBarGraphVisibility(View.INVISIBLE);
@@ -246,6 +252,9 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
             case R.id.addIncomeButton:
                 startActivity(new Intent(getApplicationContext(), AddBudgetActivity.class));
                 finish();
+                break;
+            case R.id.goals:
+                startActivity(new Intent(getApplicationContext(), GoalsActivity.class));
                 break;
         }
     }
