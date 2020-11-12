@@ -38,7 +38,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
     private String curMonth, curYear; // today month and year
     private BarChart barChart;
     private ArrayList<BarEntry> barEntries; //to store all spending entries for bar graph
-    private float budget, spending;  //for bar graph
+    private float income, spending;  //for bar graph
     private TextView budgetLabel, spentLabel;
 
     //this is for that transaction list is available throughout app
@@ -167,8 +167,8 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         curYear = timeStamp.substring(0,4);
 
         curMonthSelected = -1;
-        curYearSelected = -1;
-        budget = -1;
+        curYearSelected = 2020;
+        income = -1;
         spending = -1;
 
         //sets the filteredTransactions
@@ -184,11 +184,9 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         //creates an adapter with the months
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, months);
 
-        //provides the adapter for the spinner
-        monthDropDown.setAdapter(adapter);
-        yearDropDown.setAdapter(adapterYears);
-
-        // linking class variables to Views on layout files
+        // linking class variables to Views on layout files (xml files)
+        monthDropDown=findViewById(R.id.yearMonthDropDownMenu);
+        yearDropDown=findViewById(R.id.specificYearMonthDropDownMenu);
         barChart = (BarChart)findViewById(R.id.bar_graph);
         budgetLabel = findViewById(R.id.budgetLabel);
         spentLabel = findViewById(R.id.spentLabel);
@@ -197,6 +195,10 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         ImageButton addTransactionButton = (ImageButton) findViewById(R.id.addTransactionButton);
         ImageButton addIncomeButton = (ImageButton) findViewById(R.id.addIncomeButton);
         ImageView goalsButton=(ImageView) findViewById(R.id.goals);
+
+        //provides the adapter for the spinner
+        monthDropDown.setAdapter(adapter);
+        yearDropDown.setAdapter(adapterYears);
 
         //adding listener to buttons
         pieChartButton.setOnClickListener(this);
@@ -219,6 +221,8 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
                 setBarGraphVisibility(View.INVISIBLE);   //don't show view unless there is data inputted
                 Object item = parent.getItemAtPosition(position);
                 monthListener(item); // user selected a new month
+                spending = 0;
+                income = 0;
                 displayBarGraph();
                 barChart.invalidate(); // refreshing chart after changes
             }
@@ -257,10 +261,12 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
 
     private void displayBarGraph() {
         calculateSpending();
+        calculateIncome();
+
         barEntries = new ArrayList<>();
 
         //bar graph entries
-        barEntries.add(new BarEntry(0,budget));
+        barEntries.add(new BarEntry(0,income));
         barEntries.add(new BarEntry(1,spending));
 
         //bar graph settings
@@ -278,8 +284,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         XAxis xAxis = barChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setDrawGridLines(false);
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(new ArrayList<String>())); // hiding x axis labels by giving it an empty arrayList
-        xAxis.setCenterAxisLabels(true);
+        xAxis.setEnabled(false);
 
         // Y Axis settings
         YAxis leftAxis = barChart.getAxisLeft();
@@ -287,45 +292,83 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         rightAxis.setEnabled(false);
         leftAxis.setDrawGridLines(false);
         leftAxis.setDrawLabels(false);
+        leftAxis.setEnabled(false);
+    }
+
+    private void calculateIncome(){
+        Scanner read = null;
+        double totalIncome = 0;
+
+        try{
+            read = new Scanner(new File(getFilesDir()+"budget.txt"));
+
+            while (read.hasNext()) {
+                String cur = read.nextLine();
+                String curArr[] = cur.split(",");
+
+                String year = curArr[1].substring(0, 4);
+                String month = curArr[1].substring(5, 7);
+
+                //if month is 06 then make it just 6
+                if (month.substring(0, 1).equals("0")) {
+                    month = month.substring(1, 2);
+                }
+
+                String amountIncome = curArr[0];
+
+                //see if there is data for user selected month and year
+                if (year.equals(String.valueOf(curYearSelected)) && month.equals(String.valueOf(curMonthSelected))) {
+                    totalIncome += Double.valueOf(amountIncome);
+                }
+            }
+            if (totalIncome != 0) {
+                income = (float) totalIncome;
+                setBarGraphVisibility(View.VISIBLE); //show barGraph
+            }
+
+
+        }catch (Exception e){
+            System.out.println("\nbudget.txt doesn't exist");
+        }
     }
 
     private void calculateSpending() {
         Scanner read = null;
         double totalSpent = 0;
 
-        try
-        {
+        try {
             read = new Scanner(new File(getFilesDir()+"expenses.txt"));
-        }catch (Exception e)
-        {
-            System.out.println("");
-        }
 
-        while(read.hasNext())
-        {
-            String cur = read.nextLine();
-            String curArr[] = cur.split(",");
+            while (read.hasNext()) {
+                String cur = read.nextLine();
+                String curArr[] = cur.split(",");
 
-            String year = curArr[2].substring(0,4);
-            String month = curArr[2].substring(5,7);
-            String amountSpent = curArr[0];
-            //see if there is data for user selected month and year
-            if(year.equals(String.valueOf(curYearSelected)) && month.equals(String.valueOf(curMonthSelected)))
-            {
-                totalSpent += Double.valueOf(amountSpent);
+                String year = curArr[2].substring(0, 4);
+                String month = curArr[2].substring(5, 7);
+
+                //if month is 06 then make it just 6
+                if (month.substring(0, 1).equals("0")) {
+                    month = month.substring(1, 2);
+                }
+
+                String amountSpent = curArr[0];
+
+                //see if there is data for user selected month and year
+                if (year.equals(String.valueOf(curYearSelected)) && month.equals(String.valueOf(curMonthSelected))) {
+                    totalSpent += Double.valueOf(amountSpent);
+                }
             }
-        }
-
-        if(totalSpent != 0) {
-            spending = (float) totalSpent;
-            budget = 500.0f;
-            setBarGraphVisibility(View.VISIBLE); //show barGraph
+            if (totalSpent != 0) {
+                spending = (float) totalSpent;
+                setBarGraphVisibility(View.VISIBLE); //show barGraph
+            }
+        }catch (Exception e){
+            System.out.println("\nexpenses.txt doesn't exist");
         }
     }
 
     private void monthListener(Object o) {
         String month = o.toString();
-        curYearSelected = 2020;
 
         if(month.equals("January")){curMonthSelected = 1;}
         else if (month.equals("February")){ curMonthSelected = 2;}
@@ -341,7 +384,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         else if (month.equals("December")){ curMonthSelected = 12;}
     }
 
-    private void setTime() {
+    private void setTime(){
         if(curMonth.equals("01")){monthDropDown.setSelection(0);}
         else if (curMonth.equals("02")){ monthDropDown.setSelection(1);}
         else if (curMonth.equals("03")){ monthDropDown.setSelection(2);}
@@ -356,11 +399,12 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         else if (curMonth.equals("12")){ monthDropDown.setSelection(11);}
     }
 
-    private void setBarGraphVisibility(int visibility) {
+    private void setBarGraphVisibility(int visibility){
         budgetLabel.setVisibility(visibility);
         spentLabel.setVisibility(visibility);
         barChart.setVisibility(visibility);
     }
+
 
     public static ArrayList<Transaction> getFilteredTransactions(String month, String year){
 

@@ -85,7 +85,7 @@
         app:layout_constraintHorizontal_bias="0.136"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.308" />
+        app:layout_constraintVertical_bias="0.326" />
 
     <EditText
         android:id="@+id/amountTextField"
@@ -100,10 +100,10 @@
         android:textColorHint="#8D8D8D"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.802"
+        app:layout_constraintHorizontal_bias="0.805"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.308" />
+        app:layout_constraintVertical_bias="0.328" />
 
     <TextView
         android:id="@+id/noteTextView"
@@ -145,10 +145,10 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.522"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.369" />
+        app:layout_constraintVertical_bias="0.391" />
 
     <TextView
         android:id="@+id/oppsText"
@@ -160,10 +160,10 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.227" />
+        app:layout_constraintVertical_bias="0.267" />
 
     <TextView
         android:id="@+id/noNoteInputText"
@@ -178,5 +178,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.696" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="230dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="99dp"
+        android:layout_marginTop="152dp"
+        android:layout_marginEnd="93dp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:gravity="center"
+        android:text="Add Income"
+        android:textColor="#AD84CC"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.818"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

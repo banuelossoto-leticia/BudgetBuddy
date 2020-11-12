@@ -20,61 +20,6 @@ import java.util.Random;
 
 public class AddBudgetActivity extends AppCompatActivity
 {
-    private void saveBudget(String amount, String note)
-    {
-        try
-        {
-            //create a timestamp for the entry
-            String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH").format(new Date());
-            //define the file to save
-            File file=new File(getFilesDir()+"budget.txt");
-            //true indicates to append instead of overwrite
-            FileOutputStream fileout=new FileOutputStream(file, true);
-            OutputStreamWriter outputWriter=new OutputStreamWriter(fileout);
-            //write expense info. Placing category and note inside quotes because we are using a comma as delimiter (a note or category might contain a comma?)
-            outputWriter.write(amount+","+timeStamp+","+"\""+note+"\""+"\n");
-            outputWriter.close();
-            //successful write toast
-            Toast.makeText(getApplicationContext(),"Text file Saved to!"+ getFilesDir(),Toast.LENGTH_LONG).show();
-        }
-
-        catch (java.io.IOException e)
-        {
-            //do something if an IOException occurs.
-            Toast.makeText(getApplicationContext(),"ERROR - Text could't be added",Toast.LENGTH_LONG).show();
-        }
-    }
-
-    //fills the file with dummy data (to test it out)
-    private void generateRandomData()
-    {
-        for (int i=0;i<100;i++)
-        {
-            try
-            {
-                //generating a random amount to be saved
-                float randomAmount = new Random().nextInt(300) + 1;
-
-                //generating a random month for a timestamp
-                int randomMonth = new Random().nextInt(12) + 1;
-
-                //create a timestamp for the entry
-                String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH").format(new Date(2020-1900,randomMonth,12));
-
-                //define the file to save
-                File file = new File(getFilesDir() + "budget.txt");
-                //true indicates to append instead of overwrite
-                FileOutputStream fileout = new FileOutputStream(file, true);
-                OutputStreamWriter outputWriter = new OutputStreamWriter(fileout);
-                //write budget info. Placing category and note inside quotes because we are using a comma as delimiter (a note or category might contain a comma?)
-                outputWriter.write(randomAmount + "," + timeStamp + "," + "\"" + "TESTING" + "\"" + "\n");
-                outputWriter.close();
-            } catch (java.io.IOException e) {
-                //do something if an IOException occurs.
-                Toast.makeText(getApplicationContext(), "ERROR - Text could't be added", Toast.LENGTH_LONG).show();
-            }
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -181,5 +126,61 @@ public class AddBudgetActivity extends AppCompatActivity
                 }
             }
         });
+    }
+
+    private void saveBudget(String amount, String note)
+    {
+        try
+        {
+            //create a timestamp for the entry
+            String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH").format(new Date());
+            //define the file to save
+            File file=new File(getFilesDir()+"budget.txt");
+            //true indicates to append instead of overwrite
+            FileOutputStream fileout=new FileOutputStream(file, true);
+            OutputStreamWriter outputWriter=new OutputStreamWriter(fileout);
+            //write expense info. Placing category and note inside quotes because we are using a comma as delimiter (a note or category might contain a comma?)
+            outputWriter.write(amount+","+timeStamp+","+"\""+note+"\""+"\n");
+            outputWriter.close();
+            //successful write toast
+            Toast.makeText(getApplicationContext(),"Text file Saved to!"+ getFilesDir(),Toast.LENGTH_LONG).show();
+        }
+
+        catch (java.io.IOException e)
+        {
+            //do something if an IOException occurs.
+            Toast.makeText(getApplicationContext(),"ERROR - Text could't be added",Toast.LENGTH_LONG).show();
+        }
+    }
+
+    //fills the file with dummy data (to test it out)
+    private void generateRandomData()
+    {
+        for (int i=0;i<10;i++)
+        {
+            try
+            {
+                //generating a random amount to be saved
+                float randomAmount = new Random().nextInt(300) + 1;
+
+                //generating a random month for a timestamp
+                int randomMonth = new Random().nextInt(12) + 1;
+
+                //create a timestamp for the entry
+                String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH").format(new Date(2020-1900,randomMonth,12));
+
+                //define the file to save
+                File file = new File(getFilesDir() + "budget.txt");
+                //true indicates to append instead of overwrite
+                FileOutputStream fileout = new FileOutputStream(file, true);
+                OutputStreamWriter outputWriter = new OutputStreamWriter(fileout);
+                //write budget info. Placing category and note inside quotes because we are using a comma as delimiter (a note or category might contain a comma?)
+                outputWriter.write(randomAmount + "," + timeStamp + "," + "\"" + "TESTING" + "\"" + "\n");
+                outputWriter.close();
+            } catch (java.io.IOException e) {
+                //do something if an IOException occurs.
+                Toast.makeText(getApplicationContext(), "ERROR - Text could't be added", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }

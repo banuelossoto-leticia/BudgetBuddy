@@ -8,6 +8,23 @@
     android:background="@drawable/background_add_transaction">
 
     <TextView
+        android:id="@+id/textView2"
+        android:layout_width="219dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="99dp"
+        android:layout_marginTop="156dp"
+        android:layout_marginEnd="93dp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:gravity="center"
+        android:text="Add Transaction"
+        android:textColor="#AD84CC"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/createNewCategoryTextView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,10 +33,10 @@
         android:text="create new category"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.829"
+        app:layout_constraintHorizontal_bias="0.706"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.45" />
+        app:layout_constraintVertical_bias="0.466" />
 
     <ImageButton
         android:id="@+id/pieChartButton4"
@@ -189,10 +206,10 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintHorizontal_bias="0.541"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.351" />
+        app:layout_constraintVertical_bias="0.359" />
 
     <TextView
         android:id="@+id/oppsText"
@@ -204,10 +221,10 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintHorizontal_bias="0.469"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.227" />
+        app:layout_constraintVertical_bias="0.265" />
 
     <TextView
         android:id="@+id/noNoteInputText"
