@@ -27,7 +27,7 @@ public class AddBudgetActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_budget);
 
-        generateRandomData();
+        //generateRandomData();
 
         //creating the text views and edit texts to show if the user does not input all information needed to submit a transaction
         final TextView invalidInputAmountText = (TextView) findViewById(R.id.invalidInputAmountText);
@@ -143,13 +143,13 @@ public class AddBudgetActivity extends AppCompatActivity
             outputWriter.write(amount+","+timeStamp+","+"\""+note+"\""+"\n");
             outputWriter.close();
             //successful write toast
-            Toast.makeText(getApplicationContext(),"Text file Saved to!"+ getFilesDir(),Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Entry saved!"/*+ getFilesDir()*/,Toast.LENGTH_LONG).show();
         }
 
         catch (java.io.IOException e)
         {
             //do something if an IOException occurs.
-            Toast.makeText(getApplicationContext(),"ERROR - Text could't be added",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"ERROR - entry could't be added",Toast.LENGTH_LONG).show();
         }
     }
 

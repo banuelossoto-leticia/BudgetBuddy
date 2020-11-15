@@ -99,12 +99,12 @@ public class GoalsActivity extends AppCompatActivity
             }
 
             //successful write toast
-            Toast.makeText(getApplicationContext(), "Text file Saved to!" + getFilesDir(), Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Goal saved!", Toast.LENGTH_LONG).show();
         }
         catch (java.io.IOException e)
         {
             //do something if an IOException occurs.
-            Toast.makeText(getApplicationContext(),"ERROR - Text could't be added",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"ERROR - goal could't be added",Toast.LENGTH_LONG).show();
         }
     }
 

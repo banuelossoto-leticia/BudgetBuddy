@@ -38,12 +38,12 @@ public class CreateGoalActivity extends AppCompatActivity
             outputWriter.write(limit.getText().toString() + "," + category.getItemAtPosition(category.getSelectedItemPosition()) + "," + timeStamp +"\n");
             outputWriter.close();
             //successful write toast
-            Toast.makeText(getApplicationContext(), "Text file Saved to!" + getFilesDir(), Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Goal saved!" + getFilesDir(), Toast.LENGTH_LONG).show();
         }
         catch (java.io.IOException e)
         {
             //do something if an IOException occurs.
-            Toast.makeText(getApplicationContext(),"ERROR - Text could't be added",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"ERROR - goal could't be added",Toast.LENGTH_LONG).show();
         }
     }
 

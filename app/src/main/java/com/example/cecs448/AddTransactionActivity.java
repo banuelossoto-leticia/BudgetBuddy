@@ -37,7 +37,7 @@ public class AddTransactionActivity extends AppCompatActivity
             outputWriter.write(amount + "," + category + "," + timeStamp + "," + note + "\n");
             outputWriter.close();
             //successful write toast
-            Toast.makeText(getApplicationContext(),"Text file Saved to!"+ getFilesDir(),Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Expense saved!"/*+ getFilesDir()*/,Toast.LENGTH_LONG).show();
 
             /**LETY ADDED THIS*/
             //creating a transaction to add to arrayList transactions
@@ -49,7 +49,7 @@ public class AddTransactionActivity extends AppCompatActivity
 
         catch (java.io.IOException e) {
             //do something if an IOException occurs.
-            Toast.makeText(getApplicationContext(),"ERROR - Text could't be added",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"ERROR - expense could't be added",Toast.LENGTH_LONG).show();
         }
     }
 
@@ -91,7 +91,7 @@ public class AddTransactionActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_transaction);
 
-        generateRandomData();
+        //generateRandomData();
 
         //creating the drop down menu in order to use it in code.
         final Spinner categoriesDropDownMenu = (Spinner) findViewById(R.id.categoryDropDownMenu);

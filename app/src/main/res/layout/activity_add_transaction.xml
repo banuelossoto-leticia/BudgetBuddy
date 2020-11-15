@@ -17,7 +17,7 @@
         android:fontFamily="sans-serif-smallcaps"
         android:gravity="center"
         android:text="Add Transaction"
-        android:textColor="#AD84CC"
+        android:textColor="#C3B5DB"
         android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

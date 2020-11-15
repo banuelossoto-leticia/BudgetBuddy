@@ -64,7 +64,7 @@
         android:layout_marginTop="108dp"
         android:gravity="center"
         android:text="Month"
-        android:textColor="#A290E8"
+        android:textColor="#C3B5DB"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
