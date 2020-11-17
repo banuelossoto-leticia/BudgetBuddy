@@ -154,7 +154,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
 
         //this opens the file and saves the information into transactions
         if(SplashScreenActivity.appIsOpenFirstTime){
-            //openExpenseFile();
+            openExpenseFile();
             SplashScreenActivity.appIsOpenFirstTime = false;
         }
 

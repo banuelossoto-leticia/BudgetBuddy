@@ -108,6 +108,7 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalViewHolder
                     expense+=Float.parseFloat(amountSpentString);
                 }
             }
+            read.close();
         }
 
         return expense;
