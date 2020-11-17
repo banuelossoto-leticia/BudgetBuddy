@@ -99,7 +99,7 @@ public class GoalsActivity extends AppCompatActivity
             }
 
             //successful write toast
-            Toast.makeText(getApplicationContext(), "Goal saved!", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "Goal saved!", Toast.LENGTH_LONG).show();
         }
         catch (java.io.IOException e)
         {

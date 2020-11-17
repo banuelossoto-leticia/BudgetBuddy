@@ -32,6 +32,16 @@ public class TransactionConfirmationActivity extends AppCompatActivity {
         }, SPLASH_TIME_OUT);
 
         //this is the button for the pieChartActivity from AddTransactionActivity
+        ImageButton homeButton = (ImageButton) findViewById(R.id.pieChartButton5);
+        homeButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(TransactionConfirmationActivity.this, PieChartActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //this is the button for the pieChartActivity from AddTransactionActivity
         ImageButton pieChartButton = (ImageButton) findViewById(R.id.pieChartButton5);
         pieChartButton.setOnClickListener(new View.OnClickListener(){
             @Override

@@ -50,5 +50,15 @@ public class TransactionUpdatedConfirmationActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        //this the button for the Transaction list from TransactionUpdatedConfirmationActivity
+        ImageButton transactionList = (ImageButton) findViewById(R.id.transactionListButton8);
+        transactionList.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(TransactionUpdatedConfirmationActivity.this, PieChartActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
