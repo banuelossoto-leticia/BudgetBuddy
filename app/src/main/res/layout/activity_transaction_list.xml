@@ -8,6 +8,18 @@
     android:background="@drawable/transaction_list_background">
 
     <TextView
+        android:id="@+id/no_expenses_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="300dp"
+        android:fontFamily="monospace"
+        android:text="@string/no_expenses_message"
+        android:textSize="23sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/filterTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

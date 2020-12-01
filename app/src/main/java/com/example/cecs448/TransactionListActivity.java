@@ -15,7 +15,7 @@ import java.text.DecimalFormat;
 public class TransactionListActivity extends AppCompatActivity implements View.OnClickListener, TransactionsAdapter.OnTransactionListener {
     ImageButton homeBtn, pieBtn;
     RecyclerView rvTransaction;
-    TextView actualTotalSpentTextView;
+    TextView actualTotalSpentTextView, no_expenses;
     double totalSpent = 0;
 
     TransactionsAdapter adapter;
@@ -27,6 +27,8 @@ public class TransactionListActivity extends AppCompatActivity implements View.O
 
         homeBtn = findViewById(R.id.homeButton3);
         pieBtn = findViewById(R.id.pieChartButton3);
+        no_expenses=findViewById(R.id.no_expenses_error);
+        no_expenses.setVisibility(View.INVISIBLE);
 
         homeBtn.setOnClickListener(this);
         pieBtn.setOnClickListener(this);
@@ -45,6 +47,11 @@ public class TransactionListActivity extends AppCompatActivity implements View.O
         rvTransaction.setAdapter(adapter);
 
         //cvTransaction = (CardView) findViewById(R.id.cvTransaction);
+
+        if(HomeScreenActivity.filteredTransactions.size()==0)
+        {
+            no_expenses.setVisibility(View.VISIBLE);
+        }
 
         for(int i = 0; i < HomeScreenActivity.filteredTransactions.size(); i++){
             totalSpent = totalSpent + HomeScreenActivity.filteredTransactions.get(i).getAmount();

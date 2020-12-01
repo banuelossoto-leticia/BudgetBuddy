@@ -75,6 +75,8 @@ public class TransactionDetails extends AppCompatActivity implements View.OnClic
 
                 //deletes the current transaction from the transaction array list
                 HomeScreenActivity.transactions.remove(transactionIndex);
+                HomeScreenActivity.filteredTransactions.remove(transactionIndex);
+                //TransactionListActivity.adapter.notifyDataSetChanged();
 
                 //TODO: AFTER DELETING SAVE THE NEW TRANSACTION LIST INTO TEXT FILE
                 rewriteExpenseTextFile();

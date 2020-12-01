@@ -39,7 +39,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
     private BarChart barChart;
     private ArrayList<BarEntry> barEntries; //to store all spending entries for bar graph
     private float income, spending;  //for bar graph
-    private TextView budgetLabel, spentLabel;
+    private TextView budgetLabel, spentLabel, no_data;
 
     //this is for that transaction list is available throughout app
     static ArrayList<Transaction> transactions = new ArrayList<Transaction>();
@@ -127,22 +127,25 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
             System.out.println("");
         }
 
-        while(read.hasNext()) {
-            String cur = read.nextLine();
-            String curArr[] = cur.split(",");
+        if(read!=null)
+        {
+            while (read.hasNext()) {
+                String cur = read.nextLine();
+                String curArr[] = cur.split(",");
 
-            String amountSpentString = curArr[0];
-            String category = curArr[1];
-            String date = curArr[2];
-            String note = curArr[3];
+                String amountSpentString = curArr[0];
+                String category = curArr[1];
+                String date = curArr[2];
+                String note = curArr[3];
 
-            Double amountSpent = Double.parseDouble(amountSpentString);
+                Double amountSpent = Double.parseDouble(amountSpentString);
 
-            //saves transactions from text file into transactions object
-            Transaction transaction = new Transaction(category, amountSpent, note, date);
+                //saves transactions from text file into transactions object
+                Transaction transaction = new Transaction(category, amountSpent, note, date);
 
-            //adds the transaction into the arrayList transactions
-            transactions.add(transaction);
+                //adds the transaction into the arrayList transactions
+                transactions.add(transaction);
+            }
         }
     }
 
@@ -151,6 +154,8 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
+
+        no_data=findViewById(R.id.no_data_error);
 
         //this opens the file and saves the information into transactions
         if(SplashScreenActivity.appIsOpenFirstTime){
@@ -403,6 +408,13 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         budgetLabel.setVisibility(visibility);
         spentLabel.setVisibility(visibility);
         barChart.setVisibility(visibility);
+        if(visibility==View.INVISIBLE) {
+            no_data.setVisibility(View.VISIBLE);
+        }
+        if(visibility==View.VISIBLE)
+        {
+            no_data.setVisibility(View.INVISIBLE);
+        }
     }
 
 
