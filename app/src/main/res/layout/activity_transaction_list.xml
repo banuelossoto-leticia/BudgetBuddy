@@ -15,7 +15,7 @@
         android:layout_marginTop="300dp"
         android:fontFamily="monospace"
         android:text="@string/no_expenses_message"
-        android:textSize="23sp"
+        android:textSize="21sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
